@@ -7,8 +7,9 @@ const PurifyCSSPlugin = require('purifycss-webpack');
 
 const folderDistribute = 'dist';
 const switchMinify = false;
+const useSSL = true;
 const cssConfigEnvironments = {
-    'dev': ['style-loader', 'css-loader', 'sass-loader'],
+    'dev': ['style-loader', 'css-loader?sourceMap', 'sass-loader'],
     'prod': ExtractTextPlugin.extract({
         fallback: 'style-loader',
         use: ['css-loader', 'sass-loader']
@@ -24,7 +25,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, folderDistribute),
-        filename: 'app.bundle.js'
+        filename: '[name].bundle.js'
     },
     module: {
         rules: [
@@ -45,9 +46,11 @@ module.exports = {
         contentBase: path.join(__dirname, folderDistribute),                                    // Configure development server
         compress: true,
         port: 8080,
-        https: true,
+        https: useSSL,
         stats: 'errors-only',
-        open: true
+        hot: true,
+        open: true,
+        openPage: ''
     },
     plugins: [
         new HtmlWebpackPlugin({                                                                 // Builds .html, see https://github.com/jantimon/html-webpack-plugin
