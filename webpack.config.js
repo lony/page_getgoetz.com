@@ -30,14 +30,14 @@ module.exports = {
     module: {
         rules: [
             {                                                                                   // Converts sass to css
-                test: /\.scss$/,
+                test: /\.(sass|scss)$/,
                 use: cssConfig
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 loaders: [
                     'file-loader?name=img/[name].[ext]',                                        // See https://github.com/webpack-contrib/file-loader
-                    'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'   // See https://github.com/tcoopman/image-webpack-loader
+                    'image-webpack-loader?bypassOnDebug'                                        // See https://github.com/tcoopman/image-webpack-loader
                 ]
             }
         ]
@@ -49,7 +49,7 @@ module.exports = {
         https: useSSL,
         stats: 'errors-only',
         hot: true,
-        open: true,
+        open: false,
         openPage: ''
     },
     plugins: [
