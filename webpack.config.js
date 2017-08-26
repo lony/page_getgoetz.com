@@ -1,6 +1,7 @@
 const path = require('path');
 const glob = require('glob');
 const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack');
@@ -53,6 +54,12 @@ module.exports = {
         openPage: ''
     },
     plugins: [
+        new CleanWebpackPlugin(
+          folderDistribute,
+          {
+            dry: !envIsProd,
+          }
+        ),
         new HtmlWebpackPlugin({                                                                 // Builds .html, see https://github.com/jantimon/html-webpack-plugin
             title: 'Hello World from HtmlWebpackPlugin',
             minify: {
@@ -71,6 +78,11 @@ module.exports = {
         new PurifyCSSPlugin({
             // Give paths to parse for rules. These should be absolute!
             paths: glob.sync(path.join(__dirname, 'src/*.html')),
+            minimize: envIsProd,
+            purifyOptions: {
+              info: true,
+              whitelist: [ '*:not*' ]
+            }
         })
     ]
 };
