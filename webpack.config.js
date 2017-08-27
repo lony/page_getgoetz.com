@@ -5,6 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const folderDistribute = 'dist';
 const switchMinify = false;
@@ -67,6 +68,26 @@ module.exports = {
             },
             hash: true,
             template: './src/content.html'
+        }),
+        new FaviconsWebpackPlugin({
+          logo: './src/img/logo.png',
+          prefix: 'img/favicons/icons-[hash]/',
+          emitStats: false,
+          persistentCache: true,
+          background: '#fff',
+          title: 'Webpack App',
+          icons: {
+            favicons: true,
+            firefox: true,
+            android: true,
+            appleIcon: true,
+            appleStartup: true,
+            opengraph: true,
+            twitter: true,
+            yandex: false,
+            windows: false,
+            coast: false
+          }
         }),
         new ExtractTextPlugin({                                                                 // Builds .css, see https://github.com/webpack-contrib/extract-text-webpack-plugin
             filename: '[name].css',
