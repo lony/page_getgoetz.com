@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const RobotstxtPlugin = require('robotstxt-webpack-plugin').default;
 
 const folderDistribute = 'dist';
 const switchMinify = false;
@@ -88,6 +89,10 @@ module.exports = {
             windows: false,
             coast: false
           }
+        }),
+        new RobotstxtPlugin({
+            userAgent: '*',
+            disallow: '',
         }),
         new ExtractTextPlugin({                                                                 // Builds .css, see https://github.com/webpack-contrib/extract-text-webpack-plugin
             filename: '[name].css',
