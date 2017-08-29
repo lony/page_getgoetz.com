@@ -68,7 +68,7 @@ module.exports = {
                 collapseWhitespace: switchMinify
             },
             hash: true,
-            template: './src/content.html'
+            template: '!!ejs-compiled-loader!./src/content.ejs'
         }),
         new FaviconsWebpackPlugin({
           logo: './src/img/logo.png',
@@ -103,7 +103,7 @@ module.exports = {
         new webpack.NamedModulesPlugin(),                                                       // See https://webpack.js.org/plugins/named-modules-plugin/
         new PurifyCSSPlugin({
             // Give paths to parse for rules. These should be absolute!
-            paths: glob.sync(path.join(__dirname, 'src/*.html')),
+            paths: glob.sync(path.join(__dirname, 'src/*.ejs')),
             minimize: envIsProd,
             purifyOptions: {
               info: true,
