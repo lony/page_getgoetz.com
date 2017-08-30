@@ -7,10 +7,12 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const RobotstxtPlugin = require('robotstxt-webpack-plugin').default;
+const HtmlCriticalPlugin = require("html-critical-webpack-plugin");
+const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 
 const folderDistribute = 'dist';
 const switchMinify = false;
-const useSSL = true;
+const useSSL = false;
 const cssConfigEnvironments = {
     'dev': ['style-loader', 'css-loader?sourceMap', 'sass-loader'],
     'prod': ExtractTextPlugin.extract({
@@ -63,12 +65,15 @@ module.exports = {
           }
         ),
         new HtmlWebpackPlugin({                                                                 // Builds .html, see https://github.com/jantimon/html-webpack-plugin
-            title: 'Hello World from HtmlWebpackPlugin',
-            minify: {
-                collapseWhitespace: switchMinify
-            },
-            hash: true,
-            template: '!!ejs-compiled-loader!./src/content.ejs'
+          title: 'Hello World from HtmlWebpackPlugin',
+          minify: {
+              collapseWhitespace: switchMinify
+          },
+          hash: true,
+          template: '!!ejs-compiled-loader!./src/content.ejs'
+        }),
+        new ScriptExtHtmlWebpackPlugin({
+          defaultAttribute: 'async'
         }),
         new FaviconsWebpackPlugin({
           logo: './src/img/logo.png',
@@ -79,12 +84,12 @@ module.exports = {
           title: 'Webpack App',
           icons: {
             favicons: true,
-            firefox: true,
-            android: true,
-            appleIcon: true,
-            appleStartup: true,
             opengraph: true,
             twitter: true,
+            firefox: false,
+            android: false,
+            appleIcon: false,
+            appleStartup: false,
             yandex: false,
             windows: false,
             coast: false
@@ -98,6 +103,19 @@ module.exports = {
             filename: '[name].css',
             allChunks: true,
             disable: !envIsProd
+        }),
+        new HtmlCriticalPlugin({
+            base: path.join(path.resolve(__dirname), 'dist/'),
+            src: 'index.html',
+            dest: 'index.html',
+            inline: true,
+            minify: true,
+            extract: true,
+            width: 375,
+            height: 565,
+            penthouse: {
+              blockJSRequests: false,
+            }
         }),
         new webpack.HotModuleReplacementPlugin(),                                               // Enable HMR, see https://webpack.js.org/guides/hot-module-replacement/
         new webpack.NamedModulesPlugin(),                                                       // See https://webpack.js.org/plugins/named-modules-plugin/
