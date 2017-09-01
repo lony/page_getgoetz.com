@@ -10,8 +10,9 @@ const RobotstxtPlugin = require('robotstxt-webpack-plugin').default;
 const HtmlCriticalPlugin = require("html-critical-webpack-plugin");
 const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 
+const title = 'GetGoetz.com';
 const folderDistribute = 'dist';
-const switchMinify = false;
+const switchMinify = true;
 const useSSL = false;
 const cssConfigEnvironments = {
     'dev': ['style-loader', 'css-loader?sourceMap', 'sass-loader'],
@@ -44,6 +45,14 @@ module.exports = {
                     'file-loader?name=img/[name].[ext]',                                        // See https://github.com/webpack-contrib/file-loader
                     'image-webpack-loader?bypassOnDebug'                                        // See https://github.com/tcoopman/image-webpack-loader
                 ]
+            },
+            {
+              test: /\.(woff2?|svg)$/,
+              use: 'url-loader?limit=10000&name=fonts/[name].[ext]'
+            },
+            {
+              test: /\.(ttf|eot)$/,
+              use: 'file-loader?name=fonts/[name].[ext]'
             }
         ]
     },
@@ -65,23 +74,22 @@ module.exports = {
           }
         ),
         new HtmlWebpackPlugin({                                                                 // Builds .html, see https://github.com/jantimon/html-webpack-plugin
-          title: 'Hello World from HtmlWebpackPlugin',
           minify: {
               collapseWhitespace: switchMinify
           },
           hash: true,
-          template: '!!ejs-compiled-loader!./src/content.ejs'
+          template: '!!ejs-compiled-loader!./src/index.ejs'
         }),
         new ScriptExtHtmlWebpackPlugin({
           defaultAttribute: 'async'
         }),
         new FaviconsWebpackPlugin({
-          logo: './src/img/logo.png',
+          logo: './src/img/profile_goetz.jpg',
           prefix: 'img/favicons/icons-[hash]/',
           emitStats: false,
           persistentCache: true,
           background: '#fff',
-          title: 'Webpack App',
+          title: title,
           icons: {
             favicons: true,
             opengraph: true,
@@ -119,14 +127,14 @@ module.exports = {
         }),
         new webpack.HotModuleReplacementPlugin(),                                               // Enable HMR, see https://webpack.js.org/guides/hot-module-replacement/
         new webpack.NamedModulesPlugin(),                                                       // See https://webpack.js.org/plugins/named-modules-plugin/
-        new PurifyCSSPlugin({
-            // Give paths to parse for rules. These should be absolute!
-            paths: glob.sync(path.join(__dirname, 'src/*.ejs')),
-            minimize: envIsProd,
-            purifyOptions: {
-              info: true,
-              whitelist: [ '*:not*' ]
-            }
-        })
+        // new PurifyCSSPlugin({
+        //     // Give paths to parse for rules. These should be absolute!
+        //     paths: glob.sync(path.join(__dirname, 'src/*.ejs')),
+        //     minimize: envIsProd,
+        //     purifyOptions: {
+        //       info: true,
+        //       whitelist: [ '*:not*' ]
+        //     }
+        // })
     ]
 };

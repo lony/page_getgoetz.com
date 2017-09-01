@@ -1,8 +1,32 @@
+@charset "utf-8";
+
+// Bulma
+@import '~bulma/sass/utilities/initial-variables';
+$primary: #F86B61;
+@import '~bulma/bulma.sass';
+
+// Font awseome
+$fa-font-path: '~font-awesome/fonts';
+@import '~font-awesome/scss/font-awesome.scss';
+
+// Own
 body {
-    background-color: lightgray;
 
+    img {
 
-    div {
-        border: 1px dotted red;
+      &.profile {
+        border-radius: 50%;
+        width: 100%;
+        max-width: 500px;
+      }
+
     }
+
+    #box--hire {
+      z-index: 10;
+      position: absolute;
+      top: 1em;
+      right: 1em;
+    }
+
 }
