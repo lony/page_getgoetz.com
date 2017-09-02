@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --progress --colors",
-    "prod": "NODE_ENV=prod webpack -p",
-    "check": "npm run prod && webpack-dev-server --compress --content-base dist/",
+    "start": "webpack-dev-server --progress --colors",
+    "build": "NODE_ENV=prod webpack -p",
+    "check": "npm run build && webpack-dev-server --compress --content-base dist/",
     "light": "lighthouse http://localhost:8080/"
   },
   "author": "Goetz Epperlein",
