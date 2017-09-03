@@ -27,6 +27,7 @@ GetGoetz.com
 http://bulma.io/
 https://daneden.github.io/animate.css/
 https://github.com/BafS/Gutenberg
+https://gohugo.io/tools/starter-kits/
 
 # Domain selection
 
@@ -91,6 +92,7 @@ http://www.ximenavengoechea.com/writing/
 http://tanksuzuki.com/about/
 http://pragonauts.com/
 https://widdix.net/
+https://sean.is/
 https://www.quora.com/What-are-some-nice-examples-of-a-developers-personal-websites
 
 ## Hugo Themes
