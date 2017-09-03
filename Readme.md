@@ -9,6 +9,8 @@ GetGoetz.com
 - [x] Twitter, Instagram
 - [x] Englisch
 - [x] Who am I (Über)
+- [ ] QR code for contact details
+- [ ] 404 page
 - [ ] Resume
 - [ ] Impressum
 - [ ] Testimonials
@@ -93,6 +95,7 @@ http://tanksuzuki.com/about/
 http://pragonauts.com/
 https://widdix.net/
 https://sean.is/
+https://www.sarasoueidan.com/
 https://www.quora.com/What-are-some-nice-examples-of-a-developers-personal-websites
 
 ## Hugo Themes

@@ -1,0 +1,49 @@
+<%
+
+var title = 'Page not found - GetGoetz.com';
+
+%><!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title><%= title %></title>
+
+  <script>
+    function loadDomain() {
+        var display = document.getElementById("display-domain");
+        display.innerHTML = document.domain;
+    }
+    function checkSite() {
+        var currentSite = window.location.hostname;
+        window.location = "http://" + currentSite;
+    }
+ </script>
+
+</head>
+
+<body onload="javascript:loadDomain();">
+
+  <section class="hero is-danger is-fullheight">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title">
+          <span class="icon is-large">
+            <i class="fa fa-exclamation-circle"></i>
+          </span>
+          404 Page not found
+        </h1>
+        <h2 class="subtitle">
+          <p class="lead">
+            We couldn't find what you're looking for on <em><a onclick=javascript:checkSite(); id="display-domain"></a></em>.
+          </p>
+        </h2>
+      </div>
+    </div>
+  </section>
+
+</body>
+
+</html>

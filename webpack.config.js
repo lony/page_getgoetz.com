@@ -13,6 +13,17 @@ const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 const title = 'GetGoetz.com';
 const folderDistribute = 'dist';
 const switchMinify = true;
+const minifyOptions = {
+  collapseBooleanAttributes: switchMinify,
+  collapseWhitespace: switchMinify,
+  collapseInlineTagWhitespace: switchMinify,
+  minifyCSS: switchMinify,
+  minifyJS: switchMinify,
+  removeComments: switchMinify,
+  removeCommentsFromCDATA: switchMinify,
+  removeEmptyAttributes: switchMinify,
+  removeEmptyElements: switchMinify
+};
 const useSSL = false;
 const cssConfigEnvironments = {
     'dev': ['style-loader', 'css-loader?sourceMap', 'sass-loader'],
@@ -74,11 +85,15 @@ module.exports = {
           }
         ),
         new HtmlWebpackPlugin({                                                                 // Builds .html, see https://github.com/jantimon/html-webpack-plugin
-          minify: {
-              collapseWhitespace: switchMinify
-          },
           hash: true,
+          minify: { minifyOptions },
           template: '!!ejs-compiled-loader!./src/index.ejs'
+        }),
+        new HtmlWebpackPlugin({                                                                 // Builds .html, see https://github.com/jantimon/html-webpack-plugin
+          hash: true,
+          minify: {  minifyOptions },
+          filename: 'error.html',
+          template: '!!ejs-compiled-loader!./src/error.ejs'
         }),
         new ScriptExtHtmlWebpackPlugin({
           defaultAttribute: 'async'
