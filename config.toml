@@ -1,8 +1,8 @@
-baseurl = "http://lony.github.io"
+baseurl = "https://getgoetz.com"
 languageCode = "en_GB"
 title = "GetGoetz.com"
 copyright = "<a href=\"/blog/2017/cli-commands/\" alt=\"Link to CLI command blog post\">&copy;</a> <span class=\"has-text-weight-semibold\">Goetz Epperlein</span> 2016 - 2018"
-googleAnalytics = "UA-83817537-1"
+googleAnalytics = "UA-124600865-1"
 theme = "bulmera"
 paginate = 3
 summarylength = 30
