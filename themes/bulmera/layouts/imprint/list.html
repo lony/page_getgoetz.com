@@ -1,0 +1,30 @@
+{{ define "main" }}
+
+    <section class="section">
+        <div class="container has-text-centered">
+            <h1 class="title">
+                {{ .Title }}
+                &nbsp;
+                <a href="{{ .Site.BaseURL }}">
+                    <span class="icon">
+                        <i class="fas fa-undo"></i>
+                    </span>
+                </a>
+            </h1>
+
+            <div class="content">
+                {{ .Content }}
+            </div>
+            <div class="is-pulled-right" >
+                <a href="{{ .Site.BaseURL }}">
+                    <span class="icon">
+                        <i class="fas fa-undo"></i>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    {{- partial "footer.html" . -}}
+
+{{ end }}
