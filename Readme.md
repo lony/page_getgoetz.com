@@ -30,6 +30,9 @@ http://bulma.io/
 https://daneden.github.io/animate.css/
 https://github.com/BafS/Gutenberg
 https://gohugo.io/tools/starter-kits/
+https://validator.w3.org/checklink
+https://dequeuniversity.com/rules/axe/2.2/color-contrast
+https://www.toptal.com/designers/colorfilter/
 
 # Domain selection
 
