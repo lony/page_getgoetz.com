@@ -1,15 +1,26 @@
-# Blog
+GetGoetz.com
+======
 
-Source of my static [Hugo](https://gohugo.io/).
+# Content
 
-## Usage
-
-1. To *write* a new post use `hugo new blog/2018/foo.md`.
-2. To *render* and preview your written post use `hugo server` and then it opens [http://localhost:1313](http://localhost:1313/).
-3. To then *publish* first `git stash -u` and to write posts use `deploy.sh` in the bin folder.
-
-## Know-How
-
-* [Deploy to Github](https://hjdskes.github.io/blog/update-deploying-hugo-on-personal-gh-pages/) - No longer working (2017-10)
-* [Host on GitHub](https://gohugo.io/hosting-and-deployment/hosting-on-github/)
-* [Simple deployment to GH Pages](https://discourse.gohugo.io/t/simple-deployment-to-gh-pages/5003)
+- [x] Image
+- [x] Contact
+- [x] Xing, Linkedin
+- [x] Github, Stackoverflow, Twitter, Instagram
+- [ ] Youtube
+- [x] Englisch
+- [ ] German
+- [x] Who am I (Über)
+- [ ] Resume
+- [x] 404 page
+- [x] Imprint
+- [x] VAT
+- [x] Privacy Policy (GDPR)
+- [x] Blog
+- [ ] QR code for contact details
+- [ ] Certificates and qualifications
+- [ ] Doodle
+- [ ] Leistungen
+- [ ] Testimonials
+- [ ] Location with Map
+- [ ] GPG

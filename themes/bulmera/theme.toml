@@ -1,7 +1,7 @@
 name = "Bulmera"
 license = "MIT"
 description = "Bulma based blog theme"
-homepage = "http://example.com/"
+homepage = "https://getgoetz.com/"
 tags = ["blog", "font awesome", "highlight.js"]
 features = ["bulma", "responsive"]
 min_version = "0.41"
