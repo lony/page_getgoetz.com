@@ -12,3 +12,12 @@ Thumbs.db
 #
 # Hugo
 public
+
+#
+# Python
+venv
+
+#
+# Custom
+public_prior
+aws-credentials.json
