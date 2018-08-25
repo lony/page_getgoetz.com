@@ -5,7 +5,7 @@ date = "2017-02-25T18:02:52+02:00"
 slug = "cli-commands"
 +++
 
-Working with UNIX systems you often need commands to get something done. This is a continuously updated collection of useful commands I compile and maintain for myself - and maybe also for `you`. 
+Working with UNIX systems you often need commands to get something done. This is a continuously updated collection of useful commands I compile and maintain for myself - and maybe also for `you`.
 
 The collection is divided into different sections under which the commands are explained. For each commands there are examples how to use them, as links - from which information about the command can be gathered. For the most commands there is also a short explanation what it does.
 
@@ -112,14 +112,14 @@ If you find a bug or want to recommend something, please feel free to open an [i
 * mkfifo - Create named pipe
 
 	```
-	mkfifo in 
+	mkfifo in
 	ssh -A -l LOGIN BASTIAN_HOST nc TARGET_HOST TARGET_PORT <in | nc -l LOCAL_PORT >in
 	rm in
 	```
 
 * openssl [1](http://snazzylabs.com/tutorial/five-advanced-tricks-for-mac-users/), [2](http://www.czeskis.com/random/openssl-encrypt-file.html), [3](https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs) - SSL encryption library
 
-	* `openssl base64 -in binary.file -out base64.text` [1](https://superuser.com/questions/120796/how-to-encode-base64-via-command-line) - Encode binary file as base64 
+	* `openssl base64 -in binary.file -out base64.text` [1](https://superuser.com/questions/120796/how-to-encode-base64-via-command-line) - Encode binary file as base64
 	* `openssl base64 -d -in base64.text -out binary.file` - Decode base64 back to binary file
 	* `openssl enc -aes-256-cbc -e -in {path-in} -out {path-out}` - Encrypt file with password (aes-256)
 	* `openssl enc -aes-256-cbc -d -in {path-in} -out {path-out}` - Decrypt file with password (aes-256)
@@ -158,7 +158,7 @@ If you find a bug or want to recommend something, please feel free to open an [i
 		* `--remove-source-files` - Remove synchronized files from source
 		* `--prune-empty-dirs` - Ignore empty directories for transfer
 		* `--ignore-errors` - Ignore errors
-	
+
 	* `rsync -vzi -e ssh server:source/ dest/` [1](https://kyup.com/tutorials/copy-files-rsync-ssh/) - Use rsync via ssh
 
 * tar
@@ -171,7 +171,7 @@ If you find a bug or want to recommend something, please feel free to open an [i
 
 * virtualenv - Virtual environments for python
 
-	* `virtualenv -p /usr/bin/python2.7 venv --no-site-packages` - Create a virtual python2.7 environment inside *venv* 
+	* `virtualenv -p /usr/bin/python2.7 venv --no-site-packages` - Create a virtual python2.7 environment inside *venv*
 
 * zip
 
@@ -197,7 +197,7 @@ If you find a bug or want to recommend something, please feel free to open an [i
 ### Ruby
 
 * rbenv
-	
+
 	* `rbenv install -l` - List Ruby versions available
 	* `rbenv install 2.4.1` - Install Ruby version
 	* `rbenv versions` - Show locally installed and available versions
@@ -226,7 +226,7 @@ If you find a bug or want to recommend something, please feel free to open an [i
 		* `compile` - Compiles the application source
 		* `evicted` - Shows dependency conflicts
 		* `test` - Run the projects tests
-		
+
 ## Configuration management
 
 * [Ansible](#ansible)
@@ -246,7 +246,7 @@ If you find a bug or want to recommend something, please feel free to open an [i
 	* `berks install` - Updates cookbook dependencies (pessimistic)
 	* `berks update` - Updates cookbook dependencies to latest lib version (optimistic)
 	* `berks upload` - Uploads local cookbook and its dependencies to chef server
-		
+
 		* `berks upload --no-freeze` - Upload cookbook but allowing a later change
 
 * chef-client
@@ -258,7 +258,7 @@ If you find a bug or want to recommend something, please feel free to open an [i
 	* `chef-server-ctl org-user-add -a <ORGA> <LOGIN_NAME>` - Add user into organization using chef ACL
 
 * knife
-	* knife configuration in `~/.chef/knife.rb``
+	* knife configuration in `~/.chef/knife.rb`
 
 	```
 	log_level                :info
@@ -382,7 +382,7 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 
 		* `git pull` [1](https://git-scm.com/docs/git-pull) - Fetch from remote repository
 		* `git fetch --prune --tags` [1](https://git-scm.com/docs/git-fetch) - Fetch remote tags, delete left over local ones
-		* `git fetch origin && branch_name=$(git symbolic-ref -q HEAD) && branch_name=${branch_name##refs/heads/} && branch_name=${branch_name:-HEAD} && git reset --hard origin/$branch_name && git checkout -- . && git clean -df` - Fetch the hole repository fresh (CAUTION!) 
+		* `git fetch origin && branch_name=$(git symbolic-ref -q HEAD) && branch_name=${branch_name##refs/heads/} && branch_name=${branch_name:-HEAD} && git reset --hard origin/$branch_name && git checkout -- . && git clean -df` - Fetch the hole repository fresh (CAUTION!)
 		* `git for-each-ref --format '"'"'%(refname:short)'"'"' refs/heads | grep -v '"'"'\*\|master\|develop'"'"' | xargs git branch -D` - Fetch the branch fresh (CAUTION!)
 		* `git push` [1](https://git-scm.com/docs/git-push) - Push local changes to remote repository
 		* `git push origin --tags` - Push local tags to remote repository
@@ -392,7 +392,16 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 		* `git merge master feature` [1](https://www.atlassian.com/git/tutorials/merging-vs-rebasing) - Merges MASTER branch into FEATURE one
 		* `git rebase master` [1](https://www.atlassian.com/git/tutorials/merging-vs-rebasing) - Moves the current branch's "starting commit" to current master head (allowing fast forward merge)
 		* `git cherry-pick COMMIT_HASH` [1](https://stackoverflow.com/questions/9339429/what-does-cherry-picking-a-commit-with-git-mean), [2](https://git-scm.com/docs/git-cherry-pick) - "Copy" commit from another branch to the current branch
-		
+		* Merge one repository into another [1](https://stackoverflow.com/questions/1425892/how-do-you-merge-two-git-repositories)
+
+		```
+		cd PATH_TO_PROJECT_MERGING_INTO
+		git remote add NAME_FOR_PROJECT_A PATH_TO_PROJECT_MERGING_FROM
+		git fetch NAME_FOR_PROJECT_A
+		git merge --allow-unrelated-histories NAME_FOR_PROJECT_A/master
+		git remote remove NAME_FOR_PROJECT_A
+		```
+
 	* Stash
 
 		* `git stash` [1](https://git-scm.com/docs/git-stash) - Stores changes done in branch away for later use
@@ -456,10 +465,10 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 	* `oc port-forward POD_NAME 80:80` - Map port from pod to local system
 	* `oc rsh POD_NAME` - Open secure shell session
 
-* ps [1](https://en.wikipedia.org/w/index.php?oldid=765270359) - Static process monitor 
+* ps [1](https://en.wikipedia.org/w/index.php?oldid=765270359) - Static process monitor
 
 * screen [1](https://en.wikipedia.org/wiki/GNU_Screen) - terminal multiplexer
-	
+
 	* `screen <COMMAND>` - Start command in screen session
 
 		* Press (Strg + a + d) - Detach running session [1](https://nathan.chantrell.net/linux/an-introduction-to-screen/)
@@ -571,7 +580,7 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 ## Vagrant
 
 * `vagrant global-status` - Show existing VMs
-	
+
 	* `vagrant global-status --prune` - [1](http://stackoverflow.com/questions/24611902/remove-vagrant-box-from-global-status-after-deleting-it-from-filesystem) Update vagrant cache
 
 * `vagrant up` - Create VM from scratch
@@ -592,7 +601,7 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 
 ## VirtualBox
 
-* `VBoxManage list runningvms | awk '{print $2;}' | xargs -I {} VBoxManage controlvm {} poweroff` - [1](http://stackoverflow.com/questions/15408969/how-do-i-destroy-a-vm-when-i-deleted-the-vagrant-file) Halt all running virtual boxes 
+* `VBoxManage list runningvms | awk '{print $2;}' | xargs -I {} VBoxManage controlvm {} poweroff` - [1](http://stackoverflow.com/questions/15408969/how-do-i-destroy-a-vm-when-i-deleted-the-vagrant-file) Halt all running virtual boxes
 
 * `VBoxManage list vms | awk '{print $2;}' | xargs -I {} VBoxManage unregistervm {}` - Clean ALL virtual boxes
 
@@ -625,7 +634,7 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 	* `tail -f collectd.log | grep -E --color=auto '*Value too old*'` [1](https://unix.stackexchange.com/questions/8414/how-to-have-tail-f-show-colored-output), [2](https://unix.stackexchange.com/questions/106565/how-to-highlight-a-word-in-the-output-of-cat) - Show log output continuously highlighting specific words
 	* `tail -f collectd.log | grep -E --color=auto '*Value too old*' | sed 's/.*name = \(.*\); value.*/\1/' | awk '{ print length($0); }` [1](http://stackoverflow.com/questions/3532718/extract-string-from-string-using-regex-in-the-terminal), [2](http://stackoverflow.com/questions/8786634/how-to-print-the-number-of-characters-in-each-line-of-a-text-file) - Search for pattern regex string and count characters
 
-* xargs [1](https://www.cyberciti.biz/faq/linux-unix-bsd-xargs-construct-argument-lists-utility/) - Sub-list generator 
+* xargs [1](https://www.cyberciti.biz/faq/linux-unix-bsd-xargs-construct-argument-lists-utility/) - Sub-list generator
 
 ## Vim
 
@@ -690,7 +699,7 @@ The one and only `vim` aka [Vi IMproved](https://en.wikipedia.org/w/index.php?ol
 	* `nc -vz external.host 6379` - Just test Redis port with verbose output
 	* `netcat -vv localhost 3306`
 
-* netstat - Host based network statistic tool 
+* netstat - Host based network statistic tool
 
 	* `sudo netstat -tulpn | grep LISTEN`
 	* `sudo netstat -an | grep 8080 | grep ESTABLISHED`
@@ -714,7 +723,7 @@ The one and only `vim` aka [Vi IMproved](https://en.wikipedia.org/w/index.php?ol
 
 * ntop [1](https://en.wikipedia.org/wiki/Ntop) - Interactive network monitor
 
-* ntpdate 
+* ntpdate
 
 	* `ntpdate -q de.pool.ntp.org` - Query NTP service without changing something
 
@@ -762,7 +771,7 @@ The one and only `vim` aka [Vi IMproved](https://en.wikipedia.org/w/index.php?ol
 
 * Overview of packet traversing (or [graph](http://jekor.com/gressgraph/) your own), Source: [Pencil file](/img/blog/2017/commands/iptables.ep)
 
-![iptables overview](/img/blog/2017/commands/iptables.png)	
+![iptables overview](/img/blog/2017/commands/iptables.png)
 
 * `iptables -nvL` [1](https://www.digitalocean.com/community/tutorials/how-to-list-and-delete-iptables-firewall-rules) - Show existing rules
 
@@ -900,7 +909,7 @@ _Hint:_ SSH agent forwarding is working nicely together with [Capistrano](http:/
 		then `find /path/to/directory/ -mindepth 1 -mtime +365 -type f -name "*.tmp" -delete`
 	* `find /path/to/directory/ -mindepth 1 -maxdepth 1 -mtime +365 -type d -print -exec rm -r "{}" \;` - [1](http://unix.stackexchange.com/questions/89925/how-to-delete-directories-based-on-find-output), [2](http://askubuntu.com/questions/377438/how-can-i-recursively-delete-all-files-of-a-specific-extension-in-the-current-di) Delete directories recursivly
 	* `find . -name '*.py' -exec grep -Hn 'STRING_INSIDE_PYHTON' {} \;` [1](https://unix.stackexchange.com/questions/21033/how-can-i-grep-the-results-of-find-using-exec-and-still-output-to-a-file) - Search for python files and inside them grep for given string. The result is shown with path and line number.
-	* `find -E . \( -type f -or -type d \) -print| awk -F/ '{ if (length($NF)  > 143) { print length($NF),"\t",$0; fflush() } else {} }' > files_to_long` [1](https://unix.stackexchange.com/questions/207504/find-files-whose-name-is-4-characters-long) - Find files and folders which names are longer then 143 
+	* `find -E . \( -type f -or -type d \) -print| awk -F/ '{ if (length($NF)  > 143) { print length($NF),"\t",$0; fflush() } else {} }' > files_to_long` [1](https://unix.stackexchange.com/questions/207504/find-files-whose-name-is-4-characters-long) - Find files and folders which names are longer then 143
 
 * grep [1](https://www.cyberciti.biz/faq/grep-regular-expressions/)
 
@@ -1035,7 +1044,7 @@ For an explanation why to use `env` read [1](https://en.wikipedia.org/wiki/Sheba
 
 	````
 	while true
-	do 
+	do
 		echo "Hi"
 		sleep 1
 	done
@@ -1165,11 +1174,11 @@ Run `mongo` to open the mongo console, which lets you interact with the database
 
 ### Ubuntu
 
-* `lsb_release -a` - Print version 
+* `lsb_release -a` - Print version
 
 # Meta
 
-* How to structure this document? __Answer__: as the UNIX wikipedia 
+* How to structure this document? __Answer__: as the UNIX wikipedia
 	* [article](https://en.wikipedia.org/wiki/List_of_Unix_commands)
 	* [book](https://en.wikipedia.org/wiki/Book:Unix_Commands)
 
