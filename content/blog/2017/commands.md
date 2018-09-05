@@ -354,8 +354,10 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 
 	* Remote
 
-		* `git remote -v` - Show remotes
-		* `git remote set-url origin git@github.com:USERNAME/REPOSITORY.git` [1](https://help.github.com/articles/changing-a-remote-s-url/) - Change remote
+      * `git remote -v` - Show remotes
+      * `git remote set-url origin git@github.com:USERNAME/REPOSITORY.git` [1](https://help.github.com/articles/changing-a-remote-s-url/) - Change remote
+      * `git remote add origin git@github.com:USERNAME/REPOSITORY.git` [1](https://stackoverflow.com/questions/42830557/git-remote-add-origin-vs-remote-set-url-origin) - Add a new remote repository
+      * `git remote rm origin` [1](https://developer.atlassian.com/blog/2016/01/totw-copying-a-full-git-repo/) - Delete remote
 
 	* Branch
 
@@ -380,12 +382,14 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 
 	* Pull, Fetch & Push
 
-		* `git pull` [1](https://git-scm.com/docs/git-pull) - Fetch from remote repository
-		* `git fetch --prune --tags` [1](https://git-scm.com/docs/git-fetch) - Fetch remote tags, delete left over local ones
-		* `git fetch origin && branch_name=$(git symbolic-ref -q HEAD) && branch_name=${branch_name##refs/heads/} && branch_name=${branch_name:-HEAD} && git reset --hard origin/$branch_name && git checkout -- . && git clean -df` - Fetch the hole repository fresh (CAUTION!)
-		* `git for-each-ref --format '"'"'%(refname:short)'"'"' refs/heads | grep -v '"'"'\*\|master\|develop'"'"' | xargs git branch -D` - Fetch the branch fresh (CAUTION!)
-		* `git push` [1](https://git-scm.com/docs/git-push) - Push local changes to remote repository
-		* `git push origin --tags` - Push local tags to remote repository
+      * `git pull` [1](https://git-scm.com/docs/git-pull) - Fetch from remote repository
+      * ``for remote in `git branch -r | grep -v master `; do git checkout --track $remote ; done`` [1](https://stackoverflow.com/questions/6865302/push-local-git-repo-to-new-remote-including-all-branches-and-tags) - Fetches all branches from remote
+      * `git fetch --prune --tags` [1](https://git-scm.com/docs/git-fetch) - Fetch remote tags, delete left over local ones
+      * `git fetch origin && branch_name=$(git symbolic-ref -q HEAD) && branch_name=${branch_name##refs/heads/} && branch_name=${branch_name:-HEAD} && git reset --hard origin/$branch_name && git checkout -- . && git clean -df` - Fetch the hole repository fresh (CAUTION!)
+      * `git for-each-ref --format '"'"'%(refname:short)'"'"' refs/heads | grep -v '"'"'\*\|master\|develop'"'"' | xargs git branch -D` - Fetch the branch fresh (CAUTION!)
+      * `git push` [1](https://git-scm.com/docs/git-push) - Push local changes to remote repository
+      * `git push origin --all` [1](https://developer.atlassian.com/blog/2016/01/totw-copying-a-full-git-repo/) - Pushes all local branches to remote at once
+      * `git push origin --tags` - Push local tags to remote repository
 
 	* Merge & Rebase & Cherry-pick
 
