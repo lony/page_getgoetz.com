@@ -180,12 +180,32 @@ If you find a bug or want to recommend something, please feel free to open an [i
 
 ## Language environments
 
+* [Java](#java)
 * [Python](#python)
 * [Ruby](#ruby)
-* [Java](#java)
 * [Scala](#scala)
 
 ----
+
+### Java
+
+* jar
+
+	* `jar xf MY_JOB.jar` [1](https://stackoverflow.com/questions/39563843/how-to-extract-the-source-code-from-a-jar-file-on-a-mac) - Unpack files from jar (ATTENTION: happens inside current folder!)
+
+### JavaScript
+
+* nvm [1](https://github.com/creationix/nvm) - Node version manager
+
+* npm [1](https://www.npmjs.com/) - Node package manager
+
+  * `npm list -g --depth 0` - List global installed packages
+  * `npm install` - Install all packages inside `package.json` file
+  * `npm install -g serverless` - Install global package
+  * `npm run CMD_NAME` - Runs command inside `package.json` script section
+  * `npm remove -g @angular/cli` - Remove global package
+
+* yarn [1](https://yarnpkg.com/lang/en/) - 'New' package manager
 
 ### Python
 
@@ -202,12 +222,6 @@ If you find a bug or want to recommend something, please feel free to open an [i
 	* `rbenv install 2.4.1` - Install Ruby version
 	* `rbenv versions` - Show locally installed and available versions
 	* `rbenv global 2.4.1` - Make version the default
-
-### Java
-
-* jar
-
-	* `jar xf MY_JOB.jar` [1](https://stackoverflow.com/questions/39563843/how-to-extract-the-source-code-from-a-jar-file-on-a-mac) - Unpack files from jar (ATTENTION: happens inside current folder!)
 
 ### Scala
 
@@ -632,6 +646,8 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 	* `head -2 large_file` - Shows only first two lines
 
 * jq [1](https://stedolan.github.io/jq/) - CLI JSON processor
+
+  * `aws lambda get-policy --function-name LambdaFunctionName | jq '.Policy | fromjson'` - Get Policy element from JSON object and convert JSON-string to JSON-object
 
 * tail - Show ending of file
 
@@ -1115,6 +1131,7 @@ Overview of [SQL](https://db-engines.com) and [No-SQL](http://nosql-database.org
 
 * [SQL](#sql)
 	* [MySQL](#mysql)
+	* [PostgreSQL](#postgresql)
 * [NoSQL](#nosql)
 	* [Mongo](#mongo)
 	* [ElasticSearch](#elasticsearch)
@@ -1137,6 +1154,26 @@ Run `mysql -u root -h localhost -p` to open the MySQL console, which lets you in
 	```
 
 * `SHOW SLAVE STATUS\G` [1](https://dev.mysql.com/doc/refman/5.7/en/replication-administration-status.html) - To check replication status
+
+#### PostgreSQL
+
+* Commands to maintain the database
+
+  * `pg_ctl -D /usr/local/var/postgres start` - Start postgres
+  * `postgres -V` - Get version
+  * `psql postgres` [1](https://www.codementor.io/engineerapart/getting-started-with-postgresql-on-mac-osx-are8jcopb) - Open postgres console **Hint**: The default `postgres` user has no password
+
+* Queries against the database
+
+  * `\du` - List roles
+  * `CREATE ROLE username WITH LOGIN PASSWORD 'quoted password'` [1](https://dba.stackexchange.com/questions/82271/postgresql-roles-versus-users-grant-permissions) - Create role aka user
+  * `ALTER ROLE username CREATEDB;` - Add `CREATEDB` right to username role
+  * `CREATE DATABASE databasename;` - Create a new database
+  * `\list` - List all databases available
+  * `GRANT ALL PRIVILEGES ON DATABASE databasename TO user_x;` - Grant rights to user
+  * `\connect databasename` - Connect to a database
+  * `\dt` - List tables in current connect database
+  * `\q` - Quit console
 
 ### NoSQL
 
