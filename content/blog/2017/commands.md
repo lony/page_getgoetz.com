@@ -752,6 +752,7 @@ The one and only `vim` aka [Vi IMproved](https://en.wikipedia.org/w/index.php?ol
 * scp - secure copy
 
 	* `scp server:source/ dest/` - Copy from external server to local
+  * `scp -i "test.pem" config.py  ec2-user@35.157.227.221:/home/ec2-user/` - Copy config.py to remote host
 
 * tcpdump [1](http://packetpushers.net/masterclass-tcpdump-interpreting-output/) - Packet analyzer
 
@@ -910,6 +911,7 @@ _Hint:_ SSH agent forwarding is working nicely together with [Capistrano](http:/
 
 ### Application
 
+* `ssh -i KEY_FILE ec2-user@35.157.227.221` - Connect to machine using key file
 * `ssh -L 27017:localhost:27017 ec2-FOO.eu-west-1.compute.amazonaws.com` [1](https://www.howtoforge.com/reverse-ssh-tunneling) - Tunnel Mongo port from local machine to ec2 machine using SSH
 * `ssh -i ${SSH_KEY} -L ${PORT}:${TARGET_HOST}:${PORT} ec2-user@${BASTION_HOST} -N` - Tunnel port using a bastian host
 * `ssh -i ${SSH_KEY} -T ${TARGET_HOST} 'bash -s' < your-bash-script.sh` - Run bash script on remote host (look up -T and -tt)
