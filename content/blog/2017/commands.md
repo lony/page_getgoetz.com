@@ -61,6 +61,7 @@ If you find a bug or want to recommend something, please feel free to open an [i
 	* [Databases](#databases)
 		* [SQL](#sql)
 			* [MySQL](#mysql)
+			* [PostgreSQL](#postgresql)
 		* [NoSQL](#nosql)
 			* [Mongo](#mongo)
 			* [ElasticSearch](#elasticsearch)
@@ -1159,6 +1160,8 @@ Run `mysql -u root -h localhost -p` to open the MySQL console, which lets you in
 
 #### PostgreSQL
 
+Beeing a object-relational database management system PostgreSQL has both relational as object oriented feature - read more on about its features on [Wikipedia](https://en.wikipedia.org/wiki/PostgreSQL). Wildly popular is also its spatial database extension [PostGIS](https://postgis.net) which adds support for geographic objects allowing location queries to be run in SQL
+
 * Commands to maintain the database
 
   * `pg_ctl -D /usr/local/var/postgres start` - Start postgres
@@ -1167,14 +1170,28 @@ Run `mysql -u root -h localhost -p` to open the MySQL console, which lets you in
 
 * Queries against the database
 
-  * `\du` - List roles
-  * `CREATE ROLE username WITH LOGIN PASSWORD 'quoted password'` [1](https://dba.stackexchange.com/questions/82271/postgresql-roles-versus-users-grant-permissions) - Create role aka user
-  * `ALTER ROLE username CREATEDB;` - Add `CREATEDB` right to username role
-  * `CREATE DATABASE databasename;` - Create a new database
-  * `\list` - List all databases available
-  * `GRANT ALL PRIVILEGES ON DATABASE databasename TO user_x;` - Grant rights to user
-  * `\connect databasename` - Connect to a database
-  * `\dt` - List tables in current connect database
+  * Roles (aka users [1](https://dba.stackexchange.com/questions/82271/postgresql-roles-versus-users-grant-permissions)) and privileges
+
+    * `\du` - List roles
+    * `CREATE ROLE username WITH LOGIN PASSWORD 'quoted password'` [1](https://dba.stackexchange.com/questions/82271/postgresql-roles-versus-users-grant-permissions) - Create role aka user
+    * `ALTER ROLE username CREATEDB;` - Add `CREATEDB` right to username role
+    * `GRANT ALL PRIVILEGES ON DATABASE databasename TO user_x;` - Grant rights to user
+    * `DROP ROLE name;` - Delete role
+
+  * Database
+
+    * `CREATE DATABASE databasename;` - Create a new database
+    * `\list` - List all databases available
+    * `\connect databasename` - Connect to a database
+    * `\dt` - List tables in current connect database
+    * `SHOW data_directory;` [1](https://stackoverflow.com/questions/1137060/where-does-postgresql-store-the-database) - Show directory where data is stored
+    * Delete all tables in database [1](https://stackoverflow.com/questions/3327312/drop-all-tables-in-postgresql/13823560#13823560)
+
+      ```
+      DROP SCHEMA public CASCADE;
+      CREATE SCHEMA public;
+      ```
+
   * `\q` - Quit console
 
 ### NoSQL
@@ -1213,10 +1230,18 @@ Run `mongo` to open the mongo console, which lets you interact with the database
 
 ## Distributions
 
+* [pkgs.org](https://pkgs.org/) - Search for available packages across distributions
 * `uname -a` - Show kernel version and private system information
+
+### Debian
+
+* [Release table](https://en.wikipedia.org/wiki/Debian_version_history#Release_table) - Showing code names and kernel version
+* [packages.debian.org](https://packages.debian.org/) - Search for available packages
 
 ### Ubuntu
 
+* [Version history](https://en.wikipedia.org/wiki/Ubuntu_version_history#Table_of_versions) - Showing code names and kernel version
+* [packages.ubuntu.com](https://packages.ubuntu.com) - Search for available packages
 * `lsb_release -a` - Print version
 
 # Meta
