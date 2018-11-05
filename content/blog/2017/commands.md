@@ -430,6 +430,7 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 			* `-u` - Includes un-tracked files (aka `--include-untracked`)
 
 		* `git stash pop` - Restores, last stashed changes back to branch
+    * `git stash clear` [1](https://stackoverflow.com/questions/11369375/how-can-i-delete-all-of-my-git-stashes-at-once) - Delete **ALL** stashed changes
 
 	* Revert
 
