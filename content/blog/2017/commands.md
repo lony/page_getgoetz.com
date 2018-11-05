@@ -380,6 +380,7 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 		* `BRANCH=$(git show-ref | grep $(git rev-parse HEAD) | grep remotes | grep -v HEAD | sed -e 's/.*remotes.origin.//' | head -n1)` [1](https://stackoverflow.com/questions/14985563/how-to-retrieve-the-git-branch-name-that-was-built-by-jenkins-when-using-inverse) - Get branch currently on
 		* `git checkout -b newBranch v1.0-oldTag` - Create git branch from tag or commit-hash
 		* `git push -d <remote_name> <branch_name> && git branch -d <branch_name>` [1](https://stackoverflow.com/questions/2003505/how-do-i-delete-a-git-branch-both-locally-and-remotely) - Delete branch local and remote
+    * `git branch --merged | grep -v \* | xargs git branch -D ` [1](https://stackoverflow.com/questions/10610327/delete-all-local-git-branches) - Delete all local branches (except the one in)
 
 	* Tag
 
