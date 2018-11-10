@@ -685,7 +685,11 @@ The one and only `vim` aka [Vi IMproved](https://en.wikipedia.org/w/index.php?ol
 * dig - DNS querying tool using OS resolver
 
 	* `dig +short myip.opendns.com @resolver1.opendns.com` [1](http://unix.stackexchange.com/questions/22615/how-can-i-get-my-external-ip-address-in-a-shell-script) - Retrieve your external IP address using DNS
-	* `dig getgoetz.com ANY +noall +answer` - Show all DNS entries
+	* Show all DNS entries [1](https://superuser.com/questions/184066/dig-any-results-wrong-missing-data)
+
+    ```
+    dig any getgoetz.com @`dig +short SOA getgoetz.com | cut -d' ' -f1`
+    ```
 
 * httpie [1](https://httpie.org/),[2](https://github.com/jkbrzt/httpie) - Better curl with JSON support
 
