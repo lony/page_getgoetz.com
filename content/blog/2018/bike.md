@@ -241,6 +241,7 @@ Source: [1](https://www.mybike-magazin.de/fahrraeder_und_ebikes/test_fahrraeder/
   * [Conway](https://www.conway-bikes.de/)
   * [Böttcher](https://www.boettcher-fahrraeder.de)
   * [Ghost](https://www.ghost-bikes.com/bikes/)
+  * [veloheld.de](https://www.veloheld.de/)
 
 * E-Bike
 
