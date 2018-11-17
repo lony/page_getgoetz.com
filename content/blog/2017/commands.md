@@ -684,7 +684,7 @@ The one and only `vim` aka [Vi IMproved](https://en.wikipedia.org/w/index.php?ol
 
 * dig - DNS querying tool using OS resolver
 
-	* `dig +short myip.opendns.com @resolver1.opendns.com` [1](http://unix.stackexchange.com/questions/22615/how-can-i-get-my-external-ip-address-in-a-shell-script) - Retrieve your external IP address using DNS
+	* `dig @ns1-1.akamaitech.net whoami.akamai.net +short` [1](http://unix.stackexchange.com/questions/22615/how-can-i-get-my-external-ip-address-in-a-shell-script) - Retrieve your external IP address using DNS
 	* Show all DNS entries [1](https://superuser.com/questions/184066/dig-any-results-wrong-missing-data)
 
     ```
@@ -858,6 +858,7 @@ The one and only `vim` aka [Vi IMproved](https://en.wikipedia.org/w/index.php?ol
 * [Agent Support](#agent-support)
 * [Agent Forwarding](#agent-forwarding)
 * [Application](#application)
+* [Convert](#convert)
 
 ----
 
@@ -922,6 +923,13 @@ _Hint:_ SSH agent forwarding is working nicely together with [Capistrano](http:/
 * `ssh -L 27017:localhost:27017 ec2-FOO.eu-west-1.compute.amazonaws.com` [1](https://www.howtoforge.com/reverse-ssh-tunneling) - Tunnel Mongo port from local machine to ec2 machine using SSH
 * `ssh -i ${SSH_KEY} -L ${PORT}:${TARGET_HOST}:${PORT} ec2-user@${BASTION_HOST} -N` - Tunnel port using a bastian host
 * `ssh -i ${SSH_KEY} -T ${TARGET_HOST} 'bash -s' < your-bash-script.sh` - Run bash script on remote host (look up -T and -tt)
+
+### Convert
+
+* From AWS `*.pem` to Putty `*.ppk` [1](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html)
+
+  * Install putty (on OSX `brew install putty`) [1](https://www.ssh.com/ssh/putty/mac/#sec-Installation-using-HomeBrew)
+  * Convert to ppk `puttygen my-key-file.pem -o my-key-file.ppk` [1](https://stackoverflow.com/questions/37286791/convert-pem-to-ppk-on-macos)
 
 ## Varnish
 
