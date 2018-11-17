@@ -178,6 +178,7 @@ If you find a bug or want to recommend something, please feel free to open an [i
 
 	* `zip -r <TARGET_.zip> <SOURCE_FOLDER>/` [1](http://unix.stackexchange.com/questions/57013/zip-all-files-in-directory) - Zip folder recursively
 	* `zip -r -s 3g archive.zip FolderName/` [1](http://www.addictivetips.com/mac-os/how-to-create-a-split-zipped-archive-from-mac-os-x-terminal/) - Split into multiple chunks
+	* `zip -r -e archive.zip FolderName/` [1](https://www.cyclonis.com/how-to-create-password-protected-zip-file-mac/) - Zip folder and recursively and add a password
 
 ## Language environments
 
