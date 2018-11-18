@@ -263,6 +263,9 @@ Source: [1](https://www.rad-lager.de/lenker-vorbau.htm), [2](https://www.rad-lag
   * Spikes [1](https://en.wikipedia.org/wiki/Cold-weather_biking)
 * Carrier
   * [tubus.com](https://www.tubus.com/)
+  * [Expedition Cage](https://www.cinq5.de/zubehoer/expedition-cage/)
+* Energy
+  * [Plug5 Plus](https://www.cinq5.de/stromversorgung/plug5-plus/)
 * Trailer
   * [andersen-shopper.de](https://www.andersen-shopper.de/produkte/fahrrad-freizeitanhaenger/)
   * [weber-products.de](https://www.weber-products.de/produkte/trailer-systeme/)
@@ -349,6 +352,7 @@ Source: [1](http://www.fa-technik.adfc.de/Ratgeber/Fahrradkauf/), [2](https://ww
   * [listnride.com](https://www.listnride.com)
 * Retailer
   * [fahrradkenner.de](https://www.fahrradkenner.de)
+  * [VSF e.V.](https://www.vsf.de/)
 
 
 ## Press
