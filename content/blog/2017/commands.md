@@ -25,6 +25,7 @@ If you find a bug or want to recommend something, please feel free to open an [i
 	* [Version control systems](#version-control-systems)
 * [Processes](#processes)
 	* [Docker](#docker)
+  * [Docker-Compose](#docker-compose)
 	* [Kubernetes](#kubernetes)
 	* [Vagrant](#vagrant)
 	* [VirtualBox](#virtualbox)
@@ -592,6 +593,13 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 
 * `docker network ls` [1](https://docs.docker.com/engine/userguide/networking/) - Show docker networks
 * `docker network inspect bridge` - Show network information about the bridge network
+
+## Docker-Compose
+
+* `docker-compose rm -f` [1](https://stackoverflow.com/questions/32612650/how-to-get-docker-compose-to-always-re-create-containers-from-fresh-images) - Remove stopped service containers without asking
+* `docker-compose pull` - Pull images for services
+* `docker-compose up --build` - Build and start container for each service
+* `docker-compose stop -t 1` - Stop containers with a timeout (but keep them)
 
 ## Kubernetes
 
