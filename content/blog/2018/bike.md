@@ -267,6 +267,7 @@ Source: [1](https://www.rad-lager.de/lenker-vorbau.htm), [2](https://www.rad-lag
 * Energy
   * [Plug5 Plus](https://www.cinq5.de/stromversorgung/plug5-plus/)
 * Trailer
+  * [Weber Clutch EH](https://www.weber-products.de/products/kupplung_eh-ep-er/)
   * [andersen-shopper.de](https://www.andersen-shopper.de/produkte/fahrrad-freizeitanhaenger/)
   * [weber-products.de](https://www.weber-products.de/produkte/trailer-systeme/)
   * [roland-werk.de](https://roland-werk.de/)
