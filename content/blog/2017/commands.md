@@ -605,7 +605,8 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 
 * `docker-compose rm -f` [1](https://stackoverflow.com/questions/32612650/how-to-get-docker-compose-to-always-re-create-containers-from-fresh-images) - Remove stopped service containers without asking
 * `docker-compose pull` - Pull images for services
-* `docker-compose up --build` - Build and start container for each service
+* `docker-compose up --build` - Build and **starts** container for each service
+* `docker-compose start` [1](https://stackoverflow.com/questions/33715499/what-is-the-difference-between-docker-compose-up-and-docker-compose-start) - Starts already existing container
 * `docker-compose stop -t 1` - Stop containers with a timeout (but keep them)
 * `docker-compose down -v --rmi all` [1](https://stackoverflow.com/questions/45511956/remove-a-named-volume-with-docker-compose) - Stops and removes containers, networks, volumens as images
 
