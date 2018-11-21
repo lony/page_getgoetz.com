@@ -565,6 +565,7 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 	* `docker run -it -d shykes/pybuilder /bin/bash` [1](http://stackoverflow.com/questions/26153686/how-to-run-a-command-on-an-already-existing-docker-container) - Run image detached and start bash
 	* `docker run -it --rm alpine /bin/ash` [1](https://stackoverflow.com/questions/35689628/starting-a-shell-in-the-docker-alpine-container) - Start docker image interactivly with a shell and deletes container after shutdown
 	* `docker run -it --rm -p 5000:5000 -e PORT=5000 7b6df7f3b971` - Start container handing over environment variable PORT
+  * `docker run -it --mount src="$(pwd)",target=/usr/app,type=bind node:10 /bin/sh` [1](https://stackoverflow.com/questions/23439126/how-to-mount-a-host-directory-in-a-docker-container) - Run node container mounting local folder and opening shell
 
 * `docker exec -it f151aff2b21e /bin/bash` - Starts docker image f151aff2b21e and open interactive shell
 * `docker ps -a` - List instances (derived from images)
@@ -594,12 +595,19 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 * `docker network ls` [1](https://docs.docker.com/engine/userguide/networking/) - Show docker networks
 * `docker network inspect bridge` - Show network information about the bridge network
 
+### Volume
+
+* `docker volume ls` [1](https://docs.docker.com/engine/reference/commandline/volume_ls/) - List all volumes existing
+* `docker volume rm <VOLUME_NAME>` [1](https://docs.docker.com/engine/reference/commandline/volume_rm/) - Remove a single
+* `docker volume prune` [1](https://docs.docker.com/engine/reference/commandline/volume_prune/) - Remove all unused volumes
+
 ## Docker-Compose
 
 * `docker-compose rm -f` [1](https://stackoverflow.com/questions/32612650/how-to-get-docker-compose-to-always-re-create-containers-from-fresh-images) - Remove stopped service containers without asking
 * `docker-compose pull` - Pull images for services
 * `docker-compose up --build` - Build and start container for each service
 * `docker-compose stop -t 1` - Stop containers with a timeout (but keep them)
+* `docker-compose down -v --rmi all` [1](https://stackoverflow.com/questions/45511956/remove-a-named-volume-with-docker-compose) - Stops and removes containers, networks, volumens as images
 
 ## Kubernetes
 
