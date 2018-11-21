@@ -669,6 +669,11 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 
   * `aws lambda get-policy --function-name LambdaFunctionName | jq '.Policy | fromjson'` - Get Policy element from JSON object and convert JSON-string to JSON-object
 
+* sed [1](https://en.wikipedia.org/wiki/Sed) - Stream editor to replace text
+
+  * `sed -i"" -E "s=backendUrl: \'.*\'=backendUrl: \'http://127.0.0.1:8000\'=g" env.conf` - Replace string inside configuration (Linux - GNU)
+  * `sed -i "" -E "s=backendUrl: \'.*\'=backendUrl: \'http://127.0.0.1:8000\'=g" env.conf` - Replace string inside configuration (OSX - BSD)
+
 * tail - Show ending of file
 
 	* `tail -f collectd.log | grep -E --color=auto '*Value too old*'` [1](https://unix.stackexchange.com/questions/8414/how-to-have-tail-f-show-colored-output), [2](https://unix.stackexchange.com/questions/106565/how-to-highlight-a-word-in-the-output-of-cat) - Show log output continuously highlighting specific words
