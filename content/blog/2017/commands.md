@@ -1110,6 +1110,8 @@ For an explanation why to use `env` read [1](https://en.wikipedia.org/wiki/Sheba
 	done
 	````
 
+* `for i in {1..3}; do ls 1 && break || sleep 5; done` [1](https://unix.stackexchange.com/questions/82598/how-do-i-write-a-retry-logic-in-script-to-keep-retrying-to-run-it-upto-5-times/82610) - Try `ls 1` command 3 times before go on (simple retry mechanism as `ls 1` is no correct command)
+
 ### if
 
 * Bash version => 4 [1](http://unix.stackexchange.com/questions/250778/should-i-check-bash-version)
