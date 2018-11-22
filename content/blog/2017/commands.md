@@ -382,7 +382,7 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 		* `BRANCH=$(git show-ref | grep $(git rev-parse HEAD) | grep remotes | grep -v HEAD | sed -e 's/.*remotes.origin.//' | head -n1)` [1](https://stackoverflow.com/questions/14985563/how-to-retrieve-the-git-branch-name-that-was-built-by-jenkins-when-using-inverse) - Get branch currently on
 		* `git checkout -b newBranch v1.0-oldTag` - Create git branch from tag or commit-hash
 		* `git push -d <remote_name> <branch_name> && git branch -d <branch_name>` [1](https://stackoverflow.com/questions/2003505/how-do-i-delete-a-git-branch-both-locally-and-remotely) - Delete branch local and remote
-    * `git branch --merged | grep -v \* | xargs git branch -D ` [1](https://stackoverflow.com/questions/10610327/delete-all-local-git-branches) - Delete all local branches (except the one in)
+		* `git branch --merged | grep -v \* | xargs git branch -D ` [1](https://stackoverflow.com/questions/10610327/delete-all-local-git-branches) - Delete all local branches (except the one in)
 
 	* Tag
 
@@ -1205,33 +1205,73 @@ Beeing a object-relational database management system PostgreSQL has both relati
 
   * `pg_ctl -D /usr/local/var/postgres start` - Start postgres
   * `postgres -V` - Get version
-  * `psql postgres` [1](https://www.codementor.io/engineerapart/getting-started-with-postgresql-on-mac-osx-are8jcopb) - Open postgres console **Hint**: The default `postgres` user has no password
+
+  * psql - Query database
+
+      * `psql postgres` [1](https://www.codementor.io/engineerapart/getting-started-with-postgresql-on-mac-osx-are8jcopb) - Open postgres console **Hint**: The default `postgres` user has no password
+      * Open postgres console with advanced settings
+
+          ```
+          psql \
+          --host=127.0.0.1 \
+          --port=5432 \
+          --username=USERNAME \
+          --password \
+          --dbname=DBNAME
+          ```
+
+      * `\q` - Quit console
 
 * Queries against the database
 
   * Roles (aka users [1](https://dba.stackexchange.com/questions/82271/postgresql-roles-versus-users-grant-permissions)) and privileges
 
-    * `\du` - List roles
-    * `CREATE ROLE username WITH LOGIN PASSWORD 'quoted password'` [1](https://dba.stackexchange.com/questions/82271/postgresql-roles-versus-users-grant-permissions) - Create role aka user
-    * `ALTER ROLE username CREATEDB;` - Add `CREATEDB` right to username role
-    * `GRANT ALL PRIVILEGES ON DATABASE databasename TO user_x;` - Grant rights to user
-    * `DROP ROLE name;` - Delete role
+      * `\du` - List roles
+      * `CREATE ROLE username WITH LOGIN PASSWORD 'quoted password'` [1](https://dba.stackexchange.com/questions/82271/postgresql-roles-versus-users-grant-permissions) - Create role aka user
+      * `ALTER ROLE username CREATEDB;` - Add `CREATEDB` right to username role
+      * `GRANT ALL PRIVILEGES ON DATABASE databasename TO user_x;` - Grant rights to user
+      * `DROP ROLE name;` - Delete role
 
   * Database
 
-    * `CREATE DATABASE databasename;` - Create a new database
-    * `\list` - List all databases available
-    * `\connect databasename` - Connect to a database
-    * `\dt` - List tables in current connect database
-    * `SHOW data_directory;` [1](https://stackoverflow.com/questions/1137060/where-does-postgresql-store-the-database) - Show directory where data is stored
-    * Delete all tables in database [1](https://stackoverflow.com/questions/3327312/drop-all-tables-in-postgresql/13823560#13823560)
+      * `CREATE DATABASE databasename;` - Create a new database
+      * `\list` - List all databases available
+      * `\connect databasename` - Connect to a database
+      * `\dt` - List tables in current connect database
+      * `SHOW data_directory;` [1](https://stackoverflow.com/questions/1137060/where-does-postgresql-store-the-database) - Show directory where data is stored
+      * Delete all tables in database [1](https://stackoverflow.com/questions/3327312/drop-all-tables-in-postgresql/13823560#13823560)
 
-      ```
-      DROP SCHEMA public CASCADE;
-      CREATE SCHEMA public;
-      ```
+        ```
+        DROP SCHEMA public CASCADE;
+        CREATE SCHEMA public;
+        ```
 
-  * `\q` - Quit console
+* Backuo & Restore
+
+    * Backup
+
+          ```
+          pg_dump -Fc -v \
+            --host=127.0.0.1 \
+            --port=5432 \
+            --username=USERNAME \
+            --password \
+            --dbname=DBNAME > database_dump_name.dump
+          ```
+
+        * `-Fc` - Output format set to custom (alternatives plain or directory)
+        * `-v` - Verbose output
+
+    * Restore
+
+          ```
+          pg_restore --create -Fc -v \
+            --host=127.0.0.1 \
+            --port=5432 \
+            --username=USERNAME \
+            --password \
+            --dbname=DBNAME database_dump_name.dump
+          ```
 
 ### NoSQL
 
