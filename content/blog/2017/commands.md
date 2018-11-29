@@ -364,6 +364,11 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 		* `git diff --cached` - Show changed differences which are already cached
 		* `git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit` - Show nicely formated log (adding `-p` makes it more extensive)
 
+	* Hash
+
+    * `git rev-parse HEAD` [1](https://stackoverflow.com/questions/949314/how-to-retrieve-the-hash-for-the-current-commit-in-git) - Show commit hash of current checkout source
+    * `git rev-parse --short HEADD` - Show shortended commit hash
+
 	* Ignore
 
 		* `git update-index --assume-unchanged FILE_NAME` [1](http://stackoverflow.com/questions/9794931/keep-file-in-a-git-repo-but-dont-track-changes) - Ignore file for comparison (HINT: only set locally on repository)
@@ -1245,6 +1250,8 @@ Beeing a object-relational database management system PostgreSQL has both relati
         DROP SCHEMA public CASCADE;
         CREATE SCHEMA public;
         ```
+
+      * `SELECT * FROM pg_stat_all_tables;` [1](https://dba.stackexchange.com/questions/70017/does-amazon-rds-postgresql-require-vacuum) - Show vacuum status of tables
 
 * Backuo & Restore
 
