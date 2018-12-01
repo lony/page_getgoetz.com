@@ -281,7 +281,7 @@ Source: [1](https://www.rad-lager.de/lenker-vorbau.htm), [2](https://www.rad-lag
 
 # Manufactorer
 
-* Bike all-in-one [1](https://www.mybike-magazin.de/fahrraeder_und_ebikes/test_fahrraeder/schoener-feierabend-raeder-fuer-pendler-im-vergleich/a5798.html), [2](https://en.wikipedia.org/wiki/List_of_bicycle_brands_and_manufacturing_companies)
+* Bike all-in-one [1](https://www.mybike-magazin.de/fahrraeder_und_ebikes/test_fahrraeder/schoener-feierabend-raeder-fuer-pendler-im-vergleich/a5798.html), [2](https://en.wikipedia.org/wiki/List_of_bicycle_brands_and_manufacturing_companies), [3](https://de.wikipedia.org/wiki/Liste_von_Fahrradherstellern)
 
     * Design
 
@@ -322,6 +322,7 @@ Source: [1](https://www.rad-lager.de/lenker-vorbau.htm), [2](https://www.rad-lag
       * [Böttcher](https://www.boettcher-fahrraeder.de)
       * [Ghost](https://www.ghost-bikes.com/bikes/)
       * [veloheld.de](https://www.veloheld.de/)
+      * [faible](https://www.faible-fahrrad.de/)
 
     * E-Bike
 
