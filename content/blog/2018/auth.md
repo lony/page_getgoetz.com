@@ -27,10 +27,11 @@ Source: [1](https://serverfault.com/questions/57077/what-is-the-difference-betwe
 
 |  Provider                                                                   | From | Protocols            | Purpose                                             | CVEs (2018-03) |
 |-----------------------------------------------------------------------------|------|----------------------|-----------------------------------------------------|----------------|
-| [OAuth2](https://en.wikipedia.org/wiki/OAuth#OAuth_2.0)                     | 2012 | JSON, HTTP           | API authorization between applications              | 39 (+ v1)      |
-| [JWT](https://en.wikipedia.org/wiki/JSON_Web_Token)                         | 2015 | JSON, HTTP           | Token verifying identity                            | 9              |
+| [OAuth 2.0](https://en.wikipedia.org/wiki/OAuth#OAuth_2.0)                  | 2012 | JSON, HTTP           | API authorization between applications              | 39 (+ v1)      |
+| [JWT](https://en.wikipedia.org/wiki/JSON_Web_Token), [Tool](https://jwt.io/)| 2015 | JSON, HTTP           | Token verifying identity                            | 9              |
 | [SAML](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language)    | 2001 | SAM, XML, HTTP, SOAP | Single sign-on for enterprise users                 | 56             |
-| [OpenID](https://en.wikipedia.org/wiki/OpenID)                              | 2005 | XRDS, HTTP           | Single sign-on for consumers in an open environment | 49             |
+| [OpenID Connect 1.0](https://en.wikipedia.org/wiki/OpenID_Connect)          | 2014 | SAM, XML, HTTP, SOAP | Single sign-on for + authorisation                  |                |
+| [OpenID 2.0](https://en.wikipedia.org/wiki/OpenID)                          | 2007 | XRDS, HTTP           | Single sign-on for consumers in an open environment | 49             |
 | [Kerberos](https://en.wikipedia.org/w/index.php?oldid=824622869)            | 1980 | UDP                  | Single sign-on in controlled environment            | 228            |
 
-Source: [1](https://www.softwaresecured.com/federated-identities-openid-vs-saml-vs-oauth/), [2](https://spin.atomicobject.com/2016/05/30/openid-oauth-saml/), [3](https://security.stackexchange.com/questions/5141/how-does-openid-implement-single-sign-on), [4](https://www.owasp.org/index.php/REST_Security_Cheat_Sheet)
+Source: [1](https://www.softwaresecured.com/federated-identities-openid-vs-saml-vs-oauth/), [2](https://spin.atomicobject.com/2016/05/30/openid-oauth-saml/), [3](https://security.stackexchange.com/questions/5141/how-does-openid-implement-single-sign-on), [4](https://www.owasp.org/index.php/REST_Security_Cheat_Sheet), [5](https://security.stackexchange.com/questions/44611/difference-between-oauth-openid-and-openid-connect-in-very-simple-term/4461)
