@@ -70,9 +70,13 @@ Source: [1](https://bicycles.stackexchange.com/questions/244/terminology-index-a
   * The steeper the seat tube the sportier the driving style
   * Steeper means more power to the chain and less air resistance
   * Posture depends on application (speed vs comfort)
+  * Diamond is most commen design [1](https://en.wikipedia.org/wiki/Bicycle_frame)
   * Types [1](https://www.rad-reise-service.de/fahrrad-typologie.html), [2](https://www.test.de/Fahrrad-Was-Radler-wissen-muessen-1106507-1106624/), [3](https://www.rad-lager.de/typberatung.htm)
       * Racing cycle
-          * [Cyclo-cross bicycle](https://en.wikipedia.org/wiki/Cyclo-cross_bicycle)
+          * Race - Sportiv, weight most important (6-10 kg)
+          * Aero - Aerodynamic more important than weight (6,8 kg)
+          * Gravel - Comfortable type (7-10 kg)
+          * [Cyclo-cross](https://en.wikipedia.org/wiki/Cyclo-cross_bicycle) - Off-road optimised (8-12 kg)
       * Travel / trekking cycle
       * City cycle
           * Dutch roadster
@@ -82,7 +86,7 @@ Source: [1](https://bicycles.stackexchange.com/questions/244/terminology-index-a
           * Fully
       * E-Bike
 
-Source: [1](http://www.fa-technik.adfc.de/Komponenten/Rahmen/), [2](http://www.fa-technik.adfc.de/Ratgeber/Sitzen/), [3](https://www.rad-reise-service.de/ergonomie_typ.html), [4](https://www.rad-reise-service.de/sitzpositionen.html), [5](https://www.rad-reise-service.de/rahmengroesse.html)
+Source: [1](http://www.fa-technik.adfc.de/Komponenten/Rahmen/), [2](http://www.fa-technik.adfc.de/Ratgeber/Sitzen/), [3](https://www.rad-reise-service.de/ergonomie_typ.html), [4](https://www.rad-reise-service.de/sitzpositionen.html), [5](https://www.rad-reise-service.de/rahmengroesse.html), [6](https://www.youtube.com/watch?v=rdqZHT-9aN4)
 
 
 ## Gear
@@ -180,7 +184,7 @@ Sometimes also called crankset, its the first part of the transmission conveying
   * Wear out rim
   * Hydraulics better than with bowden
   * If, then best like Magura
-  * Recommended Magura HS 11 oder 33
+  * Recommended Magura HS 11 or 33
 
 * Disk brake [1](https://www.rad-lager.de/scheibenbremsen.htm)
 	* Wear out disc
@@ -204,11 +208,13 @@ Source: [1](https://www.test.de/Fahrradbeleuchtung-Dynamo-oder-Batterie-4597096-
 
 ## Tires and rims
 
-* Tires [1](https://www.rad-lager.de/reifen.htm)
+* Tires [1](https://www.rad-lager.de/reifen.htm), [2](https://en.wikipedia.org/wiki/Bicycle_tire)
   * Narrow or wide not a big difference
   * Pressure is important for easier rolling
   * Profil is only needed in rugged terrain
   * Less profile better for streets
+  * Narrow means less weight but higher pressure and less comfort
+  * Tires have a height of 26 - 29 inches
   * Recommended weight
       * [tubolito](https://www.tubolito.com/#produkte)
   * Recommended puncture-proof [1](https://bicycles.stackexchange.com/questions/27/what-type-of-tires-can-prevent-goatheads)
@@ -329,6 +335,7 @@ Source: [1](https://www.rad-lager.de/lenker-vorbau.htm), [2](https://www.rad-lag
 
 # Buy
 
+* [Decisions](#decisions)
 * [Measure](#measure)
 * [Test](#test)
 * [Press](#press)
@@ -339,11 +346,31 @@ Source: [1](http://www.fa-technik.adfc.de/Ratgeber/Fahrradkauf/), [2](https://ww
 
 ----
 
+## Decisions
+
+* Purpose: Sport, Commute, Shopping
+* Type: City, Trekking, Race
+* Frame: Alu, Steel
+* Tire: 26, 27, 28 inch
+* Measure: `Inside leg length * 0,62 = Frame height for trekking bike`, `Inside leg length * 0,885 = Seat height`
+* Lighting
+* Breaks
+* Gear
+* Suspension
+* Handlebars
+* Saddle
+* Carrier
+* Stand
+* Lock
+
+Source: [1](https://www.adfc-ffb.de/fileadmin/user_upload/kv-ffb/dokumente/Service/Fahrradkauf/Flyer_Fahrradkauf-2018.pdf)
+
 ## Measure
 
 * Vello-Checker - Dummy to sit on and adjust to body dimensions
 * StackAndReach [1](http://stackandreach.com), [2](http://www.bikegeo.net/), [3](https://www.rad-lager.de/rh.htm) - Mapping from body dimensions to bike
 
+Source: [1](https://www.youtube.com/watch?v=xwJpEeJW9tk), [2](https://www.youtube.com/watch?v=ugxfv5mOmIs)
 
 ## Test
 
