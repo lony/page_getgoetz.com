@@ -323,6 +323,7 @@ Source: [1](https://www.rad-lager.de/lenker-vorbau.htm), [2](https://www.rad-lag
       * [Ghost](https://www.ghost-bikes.com/bikes/)
       * [veloheld.de](https://www.veloheld.de/)
       * [faible](https://www.faible-fahrrad.de/)
+      * [vsf fahrrad manufaktur](https://www.fahrradmanufaktur.de/en/)
 
     * E-Bike
 
