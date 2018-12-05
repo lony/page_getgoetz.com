@@ -709,6 +709,7 @@ The one and only `vim` aka [Vi IMproved](https://en.wikipedia.org/w/index.php?ol
 	* `curl -X POST -H "Content-Type: application/json" -H "Cache-Control: no-cache" -d '{ "username" : "xxx", "pw" : "xxx"}' "http://localhost:8080/user/authenticate"`
 	* `curl -X GET --proxy http://proxy:8080 "http://www.google.de"` - Use a proxy
 	* `curl -s -o /dev/null -w "%{http_code}" http://www.example.org` [1](https://superuser.com/questions/272265/getting-curl-to-output-http-status-code) - Just get status code
+  * `curl -I https://www.google.de` - Show response header of request
 
 * dig - DNS querying tool using OS resolver
 
@@ -1232,7 +1233,8 @@ Beeing a object-relational database management system PostgreSQL has both relati
   * Roles (aka users [1](https://dba.stackexchange.com/questions/82271/postgresql-roles-versus-users-grant-permissions)) and privileges
 
       * `\du` - List roles
-      * `CREATE ROLE username WITH LOGIN PASSWORD 'quoted password'` [1](https://dba.stackexchange.com/questions/82271/postgresql-roles-versus-users-grant-permissions) - Create role aka user
+      * `CREATE ROLE username WITH LOGIN PASSWORD 'quoted password';` [1](https://dba.stackexchange.com/questions/82271/postgresql-roles-versus-users-grant-permissions) - Create role aka user
+      * `ALTER ROLE username WITH PASSWORD 'quoted password';` [1](https://stackoverflow.com/questions/12720967/how-to-change-postgresql-user-password), [2](https://www.postgresql.org/docs/9.0/sql-alterrole.html) - Change password for role
       * `ALTER ROLE username CREATEDB;` - Add `CREATEDB` right to username role
       * `GRANT ALL PRIVILEGES ON DATABASE databasename TO user_x;` - Grant rights to user
       * `DROP ROLE name;` - Delete role
@@ -1329,6 +1331,15 @@ Run `mongo` to open the mongo console, which lets you interact with the database
 * [Version history](https://en.wikipedia.org/wiki/Ubuntu_version_history#Table_of_versions) - Showing code names and kernel version
 * [packages.ubuntu.com](https://packages.ubuntu.com) - Search for available packages
 * `lsb_release -a` - Print version
+
+### Redhat
+
+* `/etc/redhat_release` or `lsb_release -a` [1](https://stackoverflow.com/questions/4140219/how-to-confirm-redhat-enterprise-linux-version) - Print version
+
+#### Amazon
+
+* `cat /etc/system-release` - Show version
+* [Release note](https://aws.amazon.com/amazon-linux-2/release-notes/) - Release note of Amazon Linux 2
 
 # Meta
 
