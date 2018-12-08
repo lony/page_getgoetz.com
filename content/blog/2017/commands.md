@@ -45,6 +45,7 @@ If you find a bug or want to recommend something, please feel free to open an [i
 * [Searching](#searching)
 * [Documentation](#documentation)
 	* [Atlassian JIRA](#atlassian-jira)
+	* [Slack](#slack)
 * [Miscellaneous](#miscellaneous)
 	* [Shell](#shell)
 		* [Detect shell](#detect-shell)
@@ -442,8 +443,15 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 	* Revert
 
 		* `git reset HEAD~` [1](https://stackoverflow.com/questions/927358/how-to-undo-the-most-recent-commits-in-git) - Undoes last commit but leaves files unchanged
-		* `git revert --no-commit 0766c053..HEAD && git commit` [1](https://stackoverflow.com/questions/4114095/how-to-revert-git-repository-to-a-previous-commit) - Reverts range of commits and makes commit with all reverting changes (like a patch)
+		* `git revert --no-commit 0766c053..HEAD && git commit` [1](https://stackoverflow.com/questions/4114095/how-to-revert-git-repository-to-a-previous-commit) - Reverts range of commits and makes commit with all reverted changes (like a patch)
 		* `git reset --hard COMMIT_HASH && git push origin master --force` [1](https://stackoverflow.com/questions/12305668/how-to-delete-commit-that-is-pushed-to-the-remote-repository), [2](https://git-scm.com/blog), [3](https://stackoverflow.com/questions/2530060/can-you-explain-what-git-reset-does-in-plain-english), [4](https://git-scm.com/docs/git-reset) - Delete local history till certain commit and then overwrites remote history too [THIS IS DANGEROUS!!]
+    * Remove last commit locally and on the remote branch [THIS IS DANGEROUS!!] [1](https://stackoverflow.com/questions/8225125/remove-last-commit-from-remote-git-repository)
+
+        ```
+        git reset HEAD^ # locally
+        git push origin +HEAD # force-push to remote
+        ```
+
 
 	* Move
 
@@ -984,6 +992,7 @@ _Hint:_ SSH agent forwarding is working nicely together with [Capistrano](http:/
 	* `grep -E --color=auto 'foo|bar' *.tx` - Highlight pattern found
 	* `grep -e ERROR -e WARN YOURLOG.log | grep -v IgnoreException` - Searches in YOURLOG for ERRORs and WARnings but ignores your IgnoreException
 	* `grep -r foo /home/lony/bar` - Search recursively for foo in bar
+	* `grep --include \*.py -r foo /home/lony/bar` [1](https://stackoverflow.com/questions/12516937/grep-but-only-certain-file-extensions) - Search reursively for foo in bar folder but only if file ends with *.py
 	* `grep -nr 'foo*' .` [1](http://stackoverflow.com/questions/4121803/how-can-i-use-grep-to-find-a-word-inside-a-folder) - Search for foo* in `.` showing relative line number
 	* `grep -lr 'SEAR_TERM' .` [1](https://stackoverflow.com/questions/6637882/how-can-i-use-grep-to-show-just-filenames-no-in-line-matches-on-linux) - Recurive search for term and show only file names
 	* `zgrep foo /home/lony/log.1.gz | less` - Search inside gzip log file for foo
@@ -998,6 +1007,10 @@ _Hint:_ SSH agent forwarding is working nicely together with [Capistrano](http:/
 
 	* `assignee in (currentUser()) OR reporter in (currentUser()) OR watcher in (currentUser()) ORDER BY status` - Show all my ticket e.g. where I'm assigne, reporter or watcher
 	* `(assignee in (currentUser()) OR reporter in (currentUser()) OR watcher in (currentUser())) AND status not in (Closed, Resolved, Done) ORDER BY status, priority` - All my open tickets
+
+## Slack
+
+* `/remind #random “Standup in 2 minutes  -> https://meet.google.com/xxx-xxx” at 11:28 every weekday.` - Remind random channel every weekday about standup at 11:28
 
 # Miscellaneous
 
