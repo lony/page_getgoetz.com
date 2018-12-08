@@ -1218,7 +1218,7 @@ Run `mysql -u root -h localhost -p` to open the MySQL console, which lets you in
 
 #### PostgreSQL
 
-Beeing a object-relational database management system PostgreSQL has both relational as object oriented feature - read more on about its features on [Wikipedia](https://en.wikipedia.org/wiki/PostgreSQL). Wildly popular is also its spatial database extension [PostGIS](https://postgis.net) which adds support for geographic objects allowing location queries to be run in SQL
+Beeing a object-relational database management system PostgreSQL has both relational as object oriented feature - read more on about its features on [Wikipedia](https://en.wikipedia.org/wiki/PostgreSQL). Wildly popular is also its spatial database extension [PostGIS](https://postgis.net) which adds support for geographic objects allowing location queries to be run in SQL [1](https://en.wikipedia.org/wiki/PostGIS).
 
 * Commands to maintain the database
 
