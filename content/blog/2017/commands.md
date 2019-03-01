@@ -181,6 +181,7 @@ If you find a bug or want to recommend something, please feel free to open an [i
 	* `zip -r <TARGET_.zip> <SOURCE_FOLDER>/` [1](http://unix.stackexchange.com/questions/57013/zip-all-files-in-directory) - Zip folder recursively
 	* `zip -r -s 3g archive.zip FolderName/` [1](http://www.addictivetips.com/mac-os/how-to-create-a-split-zipped-archive-from-mac-os-x-terminal/) - Split into multiple chunks
 	* `zip -r -e archive.zip FolderName/` [1](https://www.cyclonis.com/how-to-create-password-protected-zip-file-mac/) - Zip folder and recursively and add a password
+	* `zip -r -9 archive.zip FolderName/` [1](https://linux.101hacks.com/archive-compression/advanced-compression-using-zip-command/), [2](https://unix.stackexchange.com/questions/6596/how-do-i-zip-unzip-on-the-unix-command-line) - Zip folder using high compression
 
 ## Language environments
 
@@ -414,6 +415,7 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
       * `git push` [1](https://git-scm.com/docs/git-push) - Push local changes to remote repository
       * `git push origin --all` [1](https://developer.atlassian.com/blog/2016/01/totw-copying-a-full-git-repo/) - Pushes all local branches to remote at once
       * `git push origin --tags` - Push local tags to remote repository
+      * `git push origin <your_branch_name> --force` [1](https://stackoverflow.com/questions/5509543/how-do-i-properly-force-a-git-push) - Overwrite remote branch on remote repository
 
 	* Merge & Rebase & Cherry-pick
 
@@ -1251,6 +1253,30 @@ Beeing a object-relational database management system PostgreSQL has both relati
       * `ALTER ROLE username CREATEDB;` - Add `CREATEDB` right to username role
       * `GRANT ALL PRIVILEGES ON DATABASE databasename TO user_x;` - Grant rights to user
       * `DROP ROLE name;` - Delete role
+      * Show roles aka users [1](https://unix.stackexchange.com/questions/201666/command-to-list-postgresql-user-accounts)
+
+        ```
+        SELECT u.usename AS "User name",
+          u.usesysid AS "User ID",
+          CASE WHEN u.usesuper AND u.usecreatedb THEN CAST('superuser, create
+        database' AS pg_catalog.text)
+              WHEN u.usesuper THEN CAST('superuser' AS pg_catalog.text)
+              WHEN u.usecreatedb THEN CAST('create database' AS
+        pg_catalog.text)
+              ELSE CAST('' AS pg_catalog.text)
+          END AS "Attributes"
+        FROM pg_catalog.pg_user u
+        ORDER BY 1;
+        ```
+
+      * Delete role [1](https://dba.stackexchange.com/questions/155332/find-objects-linked-to-a-postgresql-role)
+
+        ```
+        REASSIGN OWNED BY pstest TO masteruser;
+        DROP OWNED BY pstest;
+        DROP ROLE pstest;
+        ```
+
 
   * Database
 
