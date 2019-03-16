@@ -325,9 +325,16 @@ Source: [1](https://www.rad-lager.de/lenker-vorbau.htm), [2](https://www.rad-lag
       * [faible](https://www.faible-fahrrad.de/)
       * [vsf fahrrad manufaktur](https://www.fahrradmanufaktur.de/en/)
 
-    * E-Bike
+    * E-Bike & Cargo
+      * [Riese & Müller GmbH](https://www.r-m.de)
+      * [tern](https://www.ternbicycles.com)
+      * [Larry vs Harry](https://www.larryvsharry.de)
+      * [Omnium](https://omniumcargo.dk)
+      * [Butchers & Bicycles](https://www.butchersandbicycles.com)
+      * [Douze Cycles](https://www.douze-cycles.com)
+      * [winther bikes](https://www.wintherbikes.com/)
 
-      * [Riese & Müller GmbH](https://www.r-m.de/de/modelle/)
+
 
 * Parts
 
