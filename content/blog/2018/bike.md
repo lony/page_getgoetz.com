@@ -405,6 +405,7 @@ Source: [1](https://www.youtube.com/watch?v=xwJpEeJW9tk), [2](https://www.youtub
 * [bike-magazin.de](https://www.bike-magazin.de)
 * [mountainbike-magazin.de](https://www.mountainbike-magazin.de/)
 * [radmarkt.de](https://radmarkt.de/)
+* [fahrradzukunft.de](https://fahrradzukunft.de/)
 
 
 ## Club
