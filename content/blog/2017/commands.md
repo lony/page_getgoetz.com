@@ -441,6 +441,8 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
           * Save and close the editor
           * Commit and refactor the commit message according to your requirements
 
+      * `git rebase --abort` - Stop bebasing
+
   * Stash
 
       * `git stash` [1](https://git-scm.com/docs/git-stash) - Stores changes done in branch away for later use
