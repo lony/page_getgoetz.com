@@ -364,7 +364,12 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
       * `git status -s` - Show short information
       * `git diff` - Show changed differences
       * `git diff --cached` - Show changed differences which are already cached
-      * `git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit` - Show nicely formated log (adding `-p` makes it more extensive)
+
+      * git log
+
+          * `git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit` - Show nicely formated log (adding `-p` makes it more extensive)
+          * `git log --since="90 days ago" --pretty=format:"" --name-only | grep "[^\s]" | sort | uniq -c | sort -nr | head -10` [1](https://www.youtube.com/watch?v=B8oJwY2Fq3I&t=2141s) - Show 10 most worked on files of a repository
+          * `git log --since="2 week ago" --until="now" --format="%an,%ct,%s"` [1](https://stackoverflow.com/questions/13547838/git-weekly-activity) - CSV export of 2 weeks git history
 
   * Hash
 
