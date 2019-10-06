@@ -475,6 +475,7 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 
       * `git filter-branch --prune-empty --subdirectory-filter SUB-FOLDER-NAME BRANCH-NAME` [1](https://help.github.com/articles/splitting-a-subfolder-out-into-a-new-repository/) - Filter folder from repository to extract for separate repository
       * `git worktree prune && git worktree add -B master public origin/master` - Prune aka clean and checkout master branch into public folder [1](https://gohugo.io/hosting-and-deployment/hosting-on-github/#put-it-into-a-script), [2](https://stacktoheap.com/blog/2016/01/19/using-multiple-worktrees-with-git/), [3](https://spin.atomicobject.com/2016/06/26/parallelize-development-git-worktrees/), [4](https://git-scm.com/docs/git-worktree)
+      * `git bisect start && git bisect good <GOOD_HASH> && git bisect bad` [1](https://www.youtube.com/watch?v=P3ZR_s3NFvM) - Search commit introducing change
 
   * Backup
 
