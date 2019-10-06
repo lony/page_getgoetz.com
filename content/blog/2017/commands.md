@@ -1029,6 +1029,8 @@ _Hint:_ SSH agent forwarding is working nicely together with [Capistrano](http:/
 ## Slack
 
 * `/remind #random “Standup in 2 minutes  -> https://meet.google.com/xxx-xxx” at 11:28 every weekday.` - Remind random channel every weekday about standup at 11:28
+* `/remind #tech “Reminder: Please prepare your teams presentation!” 8:00 September 12th every other Thursday` - Reminder for every second
+
 
 # Miscellaneous
 
@@ -1133,6 +1135,22 @@ For an explanation why to use `env` read [1](https://en.wikipedia.org/wiki/Sheba
   brew install "${brew_packages[@]}"
   ```
 
+* List of array keys in bash [1](https://unix.stackexchange.com/questions/278502/accessing-array-index-variable-from-bash-shell-script-loop)
+
+  ```
+  ARRAY=(
+    "KEY1:VALUE1"
+    "KEY2:VALUE2"
+  )
+
+  for element in "${ARRAY[@]}" ; do
+      KEY=${element%%:*}
+      VALUE=${element#*:}
+
+      printf "KEY=%s VALUE=%s\n" "$KEY" "$VALUE"
+  done
+  ```
+
 ### for
 
 * `for i in "ci" "stage" "prod"; do (export ENVI=$i; echo $ENVI); done` [1](http://stackoverflow.com/questions/8880603/loop-through-array-of-strings-in-bash),[2](https://www.cyberciti.biz/faq/linux-unix-bash-for-loop-one-line-command/),[3](http://stackoverflow.com/questions/10856129/setting-an-environment-variable-before-a-command-in-bash-not-working-for-second)
@@ -1161,6 +1179,15 @@ For an explanation why to use `env` read [1](https://en.wikipedia.org/wiki/Sheba
   ````
 
 * Compare two string parameters `if [ "$S1" = "$S2" ]; then   echo "YES"; else echo "FALSE"; fi`
+
+* File exists
+
+  ```
+  if [ ! -f "$FILE_NAME" ]; then
+    echo "Please make sure you have ${FILE_NAME}"
+    exit
+  fi
+  ```
 
 ### until
 
