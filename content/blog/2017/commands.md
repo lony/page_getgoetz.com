@@ -61,14 +61,16 @@ If you find a bug or want to recommend something, please feel free to open an [i
           * [pipe](#pipe)
           * [read](#read)
   * [Databases](#databases)
-    * [SQL](#sql)
-      * [MySQL](#mysql)
-      * [PostgreSQL](#postgresql)
-    * [NoSQL](#nosql)
-      * [Mongo](#mongo)
-      * [ElasticSearch](#elasticsearch)
+      * [SQL](#sql)
+          * [MySQL](#mysql)
+          * [PostgreSQL](#postgresql)
+      * [NoSQL](#nosql)
+          * [Mongo](#mongo)
+          * [ElasticSearch](#elasticsearch)
   * [Distributions](#distributions)
+      * [Debian](#debian)
       * [Ubuntu](#ubuntu)
+      * [Redhat](#redhat)
 * [Meta](#meta)
 
 ----
@@ -584,9 +586,15 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 ### Create
 
 * `docker pull jenkins:2.32.1` - Download docker image from registry
-* `docker build -t "tagIt" .` - Build an image from a Dockerfile
+* `docker build -t "tagIt" .` [1](https://docs.docker.com/engine/reference/commandline/build/) - Build an image from a Dockerfile
 
   * `--no-cache` [1](https://stackoverflow.com/questions/35594987/how-to-force-docker-for-clean-build-of-an-image) - Build from scratch
+
+### Tag & Push
+
+* `docker build -t <YOUR_IMAGE_NAME>:0.1.0 -t <YOUR_IMAGE_NAME>:latest .` [1](https://stackoverflow.com/questions/22080706/how-to-create-named-and-latest-tag-in-docker) - Build an image with multiple tags
+* `docker tag <YOUR_IMAGE_NAME>[:TAG] <YOUR_REGISTRY>/<YOUR_IMAGE_NAME>:<YOUR_TAG>` [1](https://docs.docker.com/engine/reference/commandline/tag/), [2](https://stackoverflow.com/questions/28349392/how-to-push-a-docker-image-to-a-private-repository) - Tag an existing image with another tag
+* `docker push <YOUR_REGISTRY>/<YOUR_IMAGE_NAME>` [1](https://docs.docker.com/engine/reference/commandline/push/) - Push an existing image to an external registry
 
 ### Run
 
@@ -644,9 +652,79 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 
 ## Kubernetes
 
-* `kubectl`
+* `helm` [1](https://helm.sh/docs/helm/#helm) - Package manager for Kubernetes
 
-  * `kubectl port-forward POD_NAME LOCAL_PORT:REMOTE_PORT -n NAMESPACE` [1](https://kubernetes-v1-4.github.io/docs/user-guide/kubectl/kubectl_port-forward/) - Forward port from Kubernetes to local machine
+  * `helm plugin install https://github.com/hayorov/helm-gcs` [1](https://github.com/hayorov/helm-gcs) - Install helm plugin
+  * `helm init` - Install Tiller on your connected Kubernetes cluster and add local config
+  * `helm gcs init gs://<GOOGLE_BUCKET_NAME> --service-account <GOOGLE_SERVICE_ACCOUNT_KEY_FILE>` - Setup repository on your bucket (or if exist do nothing)
+  * `helm repo add <NAME_FOR_REPO> gs://<GOOGLE_BUCKET_NAME>` - Add repository to helm list of repositories
+  * `helm repo remove <NAME_FOR_REPO>` - Remove repository from helm list of repositories
+  * `helm repo update` - Fetch updates from repositories
+  * `helm search <CHART_NAME>` - Search charts in local copy of repo list
+  * `helm dependency update` - Load dependencies from repositories based on requirements.yaml
+  * `helm package .` - Package a chart directory into a chart archive (.tgz)
+  * `helm gcs push <NAME_OF_HELM_ARCHIVE>.tgz <NAME_FOR_REPO> --service-account <GOOGLE_SERVICE_ACCOUNT_KEY_FILE>` - Push helm archive to repository
+  * `helm upgrade --force --install --version <HELM_CHART_VERSION> <HELM_CHART_NAME> <NAME_FOR_REPO>/<HELM_CHART_NAME>` - Upgrade helm chart or install if not already done using given chart and version from repo
+  * `helm list` - List charts running on cluster (left column is chart name)
+  * `helm delete <CHART_NAME>` - Delete chart from cluster
+
+* `kubectl` [1](https://kubernetes.io/docs/reference/kubectl/overview/) - Kubernetes CLI
+
+  * Cluster
+
+      * `kubectl cluster-info` - Show status info of cluster and cluster services
+      * `kubectl config get-clusters` - List clusters
+      * `kubectl config get-contexts` - List contexts configured with kubectl (aka connections)
+      * `kubectl config unset contexts` - Delete ALL configured connections
+      * `CLUSTER_CONTEXT=$(kubectl config get-contexts |sed -n '2p' | awk '{print $2}')` - Select first context out of list and store it
+      * `kubectl config use-context <NAME_OF_CLUSTER_CONTEXT>` - Switch default connection used
+      * `kubectl get all` - List all cluster entities (pods, services, deployments, replicasets)
+
+  * Nodes
+
+      * `kubectl get nodes` - Show nodes (aka hosts) in cluster
+      * `kubectl describe node` - Show detailed info of nodes
+
+  * Pods
+
+      * `kubectl get pods` - Show pods in cluster
+      * `kubectl port-forward POD_NAME LOCAL_PORT:REMOTE_PORT -n NAMESPACE` [1](https://kubernetes-v1-4.github.io/docs/user-guide/kubectl/kubectl_port-forward/) - Forward port from Kubernetes to local machine
+
+  * Secrets
+
+      * Create secret to access registry [1](https://ryaneschinger.com/blog/using-google-container-registry-gcr-with-minikube/)
+
+        ```
+        kubectl create secret docker-registry gcr \
+                  --docker-server=https://gcr.io \
+                  --docker-username=oauth2accesstoken \
+                  --docker-password="$(gcloud auth print-access-token)" \
+                  --docker-email=youremail@example.com
+        ```
+
+      * `kubectl get secret` - List all secrets of cluster
+
+  * Service Account [1](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
+
+      * Update service account and llink to Docker pull
+
+        ```
+        kubectl patch serviceaccount default \
+                -p '{"imagePullSecrets": [{"name": "gcr"}]}'
+        ```
+
+      * `kubectl get serviceaccount default -o yaml` - List service account configuration
+
+
+* `minikube` [1](https://github.com/kubernetes/minikube) - Kubernetes locally
+
+  * `minikube start` - Start
+  * `minikube status` - Show cluster info
+  * `minikube dashboard` - Show dashboard
+  * `minikube ip` - Show IP of minikube
+  * `minikube logs` - Show cluster logs
+  * `minikube stop` - Stop
+  * `minikube delete` - Delete image and data
 
 ## Vagrant
 
@@ -706,6 +784,8 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 
   * `sed -i"" -E "s=backendUrl: \'.*\'=backendUrl: \'http://127.0.0.1:8000\'=g" env.conf` - Replace string inside configuration (Linux - GNU)
   * `sed -i "" -E "s=backendUrl: \'.*\'=backendUrl: \'http://127.0.0.1:8000\'=g" env.conf` - Replace string inside configuration (OSX - BSD)
+  * `sed '2q;d' <YOUR_FILE>` - Get second line from file
+  * `sed -i "s#STRING_IN_FILE#STRING_TO_REPLACE_WITH#g" <YOUR_FILE>` - Replace a string inside a given file
 
 * tail - Show ending of file
 
@@ -1174,8 +1254,8 @@ For an explanation why to use `env` read [1](https://en.wikipedia.org/wiki/Sheba
 
   ````
   if [[ ${BASH_VERSION%%.*} -lt 4 ]]; then
-  echo "This script requires bash version > 4. Currently running is ${BASH_VERSION%%.*}"
-  exit 1
+    echo "This script requires bash version > 4. Currently running is ${BASH_VERSION%%.*}"
+    exit 1
   fi
   ````
 
@@ -1187,6 +1267,28 @@ For an explanation why to use `env` read [1](https://en.wikipedia.org/wiki/Sheba
   if [ ! -f "$FILE_NAME" ]; then
     echo "Please make sure you have ${FILE_NAME}"
     exit
+  fi
+  ```
+
+* Check for GNU sed
+
+  ```
+  if [ -x "$(command -v gsed)" ]; then
+    SED="gsed"
+  elif [ -x "$(command -v sed)" ]; then
+    SED="sed"
+  else
+    >&2 echo 'Please install GNU sed' >&2
+    exit 1
+  fi
+  ```
+
+* Check for given environment variable
+
+  ```
+  if [ -z "$YOUR_COOL_VAR" ]; then
+    echo 1>&2 "error: missing YOUR_COOL_VAR environment variable"
+    exit 1
   fi
   ```
 
@@ -1227,9 +1329,9 @@ EOF
 
 * set -? [1](https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin)
 
-  * `-e` - Failed command causes exit of script.
-  * `-u` - Treat unset parameters as error and exit.
-  * `-x` - Trace of simple commands and their arguments
+  * `-e` - Failed command causes exit of script
+  * `-u` - Treat unset parameters as error and exit
+  * `-x | -o xtrace` - Trace of simple commands and their arguments
 
 
 ## Databases
@@ -1393,13 +1495,22 @@ Run `mongo` to open the mongo console, which lets you interact with the database
   ```
   PUT _cluster/settings
   {
-  "transient": {
-    "cluster.routing.allocation.enable": "none"
-  }
+      "transient": {
+        "cluster.routing.allocation.enable": "none"
+      }
   }
   ```
 
 ## Distributions
+
+Overview of commands or other useful information for different [Linux distribution](https://en.wikipedia.org/wiki/Linux_distribution).
+
+* [Debian](#debian)
+* [Ubuntu](#ubuntu)
+* [Redhat](#redhat)
+  * [Amazon](#amazon)
+
+----
 
 * [pkgs.org](https://pkgs.org/) - Search for available packages across distributions
 * `uname -a` - Show kernel version and private system information
