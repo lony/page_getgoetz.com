@@ -43,34 +43,25 @@ If you find a bug or want to recommend something, please feel free to open an [i
       * [Application](#application)
   * [Varnish](#varnish)
 * [Searching](#searching)
+* [Windowing system](#windowing-system)
 * [Documentation](#documentation)
   * [Atlassian JIRA](#atlassian-jira)
   * [Slack](#slack)
 * [Miscellaneous](#miscellaneous)
   * [Shell](#shell)
-      * [Detect shell](#detect-shell)
-      * [Shell types and frameworks](#shell-types-and-frameworks)
-      * [Setup](#setup)
-      * [Shebangs](#shebangs)
-      * [Programming sh](#programming-sh)
-          * [array](#array)
-          * [for](#for)
-          * [if](#if)
-          * [until](#until)
-          * [pasting](#pasting)
-          * [pipe](#pipe)
-          * [read](#read)
+    * [Detect shell](#detect-shell)
+    * [Shell types and frameworks](#shell-types-and-frameworks)
+    * [Setup](#setup)
+    * [Shebangs](#shebangs)
+    * [Programming sh](#programming-sh)
   * [Databases](#databases)
-      * [SQL](#sql)
-          * [MySQL](#mysql)
-          * [PostgreSQL](#postgresql)
-      * [NoSQL](#nosql)
-          * [Mongo](#mongo)
-          * [ElasticSearch](#elasticsearch)
+    * [SQL](#sql)
+      * [MySQL](#mysql)
+      * [PostgreSQL](#postgresql)
+    * [NoSQL](#nosql)
+      * [Mongo](#mongo)
+      * [ElasticSearch](#elasticsearch)
   * [Distributions](#distributions)
-      * [Debian](#debian)
-      * [Ubuntu](#ubuntu)
-      * [Redhat](#redhat)
 * [Meta](#meta)
 
 ----
@@ -122,6 +113,24 @@ If you find a bug or want to recommend something, please feel free to open an [i
   rm in
   ```
 
+* gpg-agent - Secrets manager for GPG
+	* `gpgconf --kill gpg-agent` - Stop
+	* `gpgconf --launch gpg-agent` - Start
+
+* gpg2 - OpenPGP encryption and signing tool
+	* `gpg2 --card-edit` - Menu to work with smartcards like Yubikey
+		* Default PINs User=123456 Admin=12345678
+		* admin - Elevate to admin
+		* key-attr - Change key config
+		* generate - Generate new key
+		* passwd - Change passwords
+	* `gpg2 --card-status`
+	* `gpg2 --list-keys`
+	* `gpg2 --armor --export <ID> > OUT_FILE.asc` [1](https://stackoverflow.com/questions/46689885/how-to-get-public-key-from-an-openpgp-smart-card-without-using-key-servers) - Extract public GPG key
+	* `gpg2 --import OUT_FILE.asc`
+	* `gpg-connect-agent --hex` - Connect to running agent to send commands
+		* Reset YubiKey [1](https://support.yubico.com/support/solutions/articles/15000006421-resetting-the-openpgp-applet-on-the-yubikey), [2](https://gist.github.com/pkirkovsky/c3d703633effbdfcb48c)
+
 * openssl [1](http://snazzylabs.com/tutorial/five-advanced-tricks-for-mac-users/), [2](http://www.czeskis.com/random/openssl-encrypt-file.html), [3](https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs) - SSL encryption library
 
   * `openssl base64 -in binary.file -out base64.text` [1](https://superuser.com/questions/120796/how-to-encode-base64-via-command-line) - Encode binary file as base64
@@ -168,9 +177,15 @@ If you find a bug or want to recommend something, please feel free to open an [i
 
 * tar
 
-  * `tar cvzf - 2017-02-11_T430s_Windows8.tib | split -b 4294967295 -  ../win-bu.tar.gz.` [1](http://unix.stackexchange.com/questions/61774/create-a-tar-archive-split-into-blocks-of-a-maximum-size) - Create gzip tar archiv in multiple chunks
+  * Tar / Create
 
-  * `cat win-bu.tar.gz.aa win-bu.tar.gz.ab > combined.tar.gz \
+    * `tar -cvzf archive_name.tar.gz folder_name_to_zip/` [1](https://stackoverflow.com/questions/27491606/how-to-create-a-linux-compatible-zip-archive-of-a-directory-on-a-mac) - Create gzip tar from single folder
+    * `tar cvzf - 2017-02-11_T430s_Windows8.tib | split -b 3500m -  ../win-bu.tar.gz.` [1](http://unix.stackexchange.com/questions/61774/create-a-tar-archive-split-into-blocks-of-a-maximum-size) - Create gzip tar archiv in multiple chunks
+
+  * Untar
+
+    * `tar -xvf archive_name.tar.gz` [1](https://www.tecmint.com/18-tar-command-examples-in-linux/) - Untar single file in current directory
+    * `cat win-bu.tar.gz.aa win-bu.tar.gz.ab > combined.tar.gz \
     gunzip combined.tar.gz \
     tar -xvf combined.tar` [1](http://stackoverflow.com/questions/27491606/how-to-create-a-linux-compatible-zip-archive-of-a-directory-on-a-mac) - Unzip multi-chunk gunziped tar archive
 
@@ -180,7 +195,7 @@ If you find a bug or want to recommend something, please feel free to open an [i
 
 * zip
 
-  * `zip -r <TARGET_.zip> <SOURCE_FOLDER>/` [1](http://unix.stackexchange.com/questions/57013/zip-all-files-in-directory) - Zip folder recursively
+  * `zip -yr <TARGET_.zip> <SOURCE_FOLDER>/` [1](http://unix.stackexchange.com/questions/57013/zip-all-files-in-directory) - Zip folder recursively and do not follow symlinks (-y)
   * `zip -r -s 3g archive.zip FolderName/` [1](http://www.addictivetips.com/mac-os/how-to-create-a-split-zipped-archive-from-mac-os-x-terminal/) - Split into multiple chunks
   * `zip -r -e archive.zip FolderName/` [1](https://www.cyclonis.com/how-to-create-password-protected-zip-file-mac/) - Zip folder and recursively and add a password
   * `zip -r -9 archive.zip FolderName/` [1](https://linux.101hacks.com/archive-compression/advanced-compression-using-zip-command/), [2](https://unix.stackexchange.com/questions/6596/how-do-i-zip-unzip-on-the-unix-command-line) - Zip folder using high compression
@@ -348,9 +363,14 @@ If you find a bug or want to recommend something, please feel free to open an [i
   * `aptitude update` - Update is used to re-synchronize the package index files from their sources via Internet
   * `aptitude upgrade` - Upgrade is used to install the newest versions of all packages currently installed on the system
 
+* choco [1](https://chocolatey.org/) - Chocolatey, the package manager for Windows
+
+	* `choco install googlechrome` - Install Google Chrome
+	* `clist -l` [1](https://superuser.com/questions/1270151/how-to-list-installed-chocolatey-packages) - List all installed packages
+
 * dpkg - Debian/Ubuntu package manager (without dependencies)
 
-  * `dpkg -l`
+  * `dpkg -l` - List of installed packages
 
 * `sudo update-alternatives --config java` - Set default Java version on system
 
@@ -360,18 +380,24 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 
 * git [1](https://git-scm.com/) - Distributed VCS
 
-  * Status & Log
+  * Status & (Ref)Log
 
       * `git status` - Show extensive information about a branch
       * `git status -s` - Show short information
       * `git diff` - Show changed differences
       * `git diff --cached` - Show changed differences which are already cached
+      * `git bisect start && git bisect good <GOOD_HASH> && git bisect bad` [1](https://www.youtube.com/watch?v=P3ZR_s3NFvM) - Search commit introducing change
 
       * git log
 
           * `git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit` - Show nicely formated log (adding `-p` makes it more extensive)
           * `git log --since="90 days ago" --pretty=format:"" --name-only | grep "[^\s]" | sort | uniq -c | sort -nr | head -10` [1](https://www.youtube.com/watch?v=B8oJwY2Fq3I&t=2141s) - Show 10 most worked on files of a repository
           * `git log --since="2 week ago" --until="now" --format="%an,%ct,%s"` [1](https://stackoverflow.com/questions/13547838/git-weekly-activity) - CSV export of 2 weeks git history
+
+      * git reflog
+
+          * `git reflog` [1](https://dev.to/lydiahallie/cs-visualized-useful-git-commands-37p1) - Show log of git commands executed
+          * `git reset --hard HEAD@{5}` [1](https://stackoverflow.com/questions/134882/undoing-a-git-rebase) - Switch to commit using ref log number
 
   * Hash
 
@@ -472,12 +498,13 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
             git push origin +HEAD # force-push to remote
             ```
 
+      * `git update-ref -d HEAD` [1](https://stackoverflow.com/questions/6632191/how-to-revert-initial-git-commit) - Undo first commit of branch
+
 
   * Move
 
       * `git filter-branch --prune-empty --subdirectory-filter SUB-FOLDER-NAME BRANCH-NAME` [1](https://help.github.com/articles/splitting-a-subfolder-out-into-a-new-repository/) - Filter folder from repository to extract for separate repository
       * `git worktree prune && git worktree add -B master public origin/master` - Prune aka clean and checkout master branch into public folder [1](https://gohugo.io/hosting-and-deployment/hosting-on-github/#put-it-into-a-script), [2](https://stacktoheap.com/blog/2016/01/19/using-multiple-worktrees-with-git/), [3](https://spin.atomicobject.com/2016/06/26/parallelize-development-git-worktrees/), [4](https://git-scm.com/docs/git-worktree)
-      * `git bisect start && git bisect good <GOOD_HASH> && git bisect bad` [1](https://www.youtube.com/watch?v=P3ZR_s3NFvM) - Search commit introducing change
 
   * Backup
 
@@ -492,6 +519,10 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 
 * atop [1](http://www.tecmint.com/how-to-install-atop-to-monitor-logging-activity-of-linux-system-processes/) - System & Process Monitor like top or htop
 
+* ctop [1](https://github.com/bcicen/ctop) - Top for docker container
+
+* `cat /proc/cpuinfo` - Show CPU information
+
 * df - Display free disk space
 
   * `df -h` - Show space used
@@ -502,13 +533,28 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
   * `du -h --max-depth=1 /`
   * `du -a /var | sort -n -r | head -n 10` [1](https://www.cyberciti.biz/faq/how-do-i-find-the-largest-filesdirectories-on-a-linuxunixbsd-filesystem/) - List 10 biggest folders or files in /var
 
+* free - Show free and used memory information of system
+
+	* `free -m` - Show in megabyte
+
 * glances [1](https://nicolargo.github.io/glances/) - A top/htop alternative
 
 * htop [1](https://codeahoy.com/2017/01/20/hhtop-explained-visually) - Interactive process monitor
 
+* initctl [1](https://linux.die.net/man/8/initctl) - init daemon control tool
+
+	* `sudo initctl restart apache` [1](https://wiki.ubuntu.com/SystemdForUpstartUsers),[2](http://upstart.ubuntu.com/) - Restart command for upstart (using /etc/init)
+
 * iotop [1](http://guichaz.free.fr/iotop/), [2](http://www.tecmint.com/iotop-monitor-linux-disk-io-activity-per-process/) - System I/O monitor like top
 
-* `sudo initctl restart apache` [1](https://wiki.ubuntu.com/SystemdForUpstartUsers),[2](http://upstart.ubuntu.com/) - Restart command for upstart (using /etc/init)
+* journalctl [1](https://www.freedesktop.org/software/systemd/man/journalctl.html) — Query the systemd journal
+
+* kill - End process
+
+	* `kill -9 PID_ID` [1](https://askubuntu.com/questions/184071/what-is-the-purpose-of-the-9-option-in-the-kill-command) - Send kill [signal](https://en.wikipedia.org/w/index.php?oldid=951358709) to application process which is terminated immediatly
+	* `kill PID_ID` - Terminate process waiting for termination
+
+* `cat /proc/loadavg` - Show CPU load average for system
 
 * lsof [1](https://en.wikipedia.org/wiki/Lsof) - list of open files
 
@@ -516,13 +562,27 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
   * `sudo lsof | grep jre`
   * `sudo lsof -i -n -P | grep LISTEN`
 
+* ncdu [1](https://en.wikipedia.org/wiki/Ncdu) - Show space used by folder
+
 * oc [1](https://github.com/openshift/origin) - OpenShift CLI tool
 
   * `oc login https://YOUR_CLUSER --token=YOUR_SECRET_TOKEN` - Login to your cluster
   * `oc port-forward POD_NAME 80:80` - Map port from pod to local system
   * `oc rsh POD_NAME` - Open secure shell session
+  * `oc status` - Shows highlevel status
+  * `oc get pod -l name=MyCoolApp -o name --field-selector 'status.phase==Running'` - Show running pods for app
+  * `oc rsync --no-perms=true --delete=true --exclude=.git/ PATH_TO_APP_FOLDER POD_NAME:.` - Rsync app folder to pod folder
+
+* opensnoop [1](https://apple.stackexchange.com/questions/14409/how-to-monitor-file-access-for-an-os-x-application), [2](http://dtrace.org/blogs/brendan/2011/10/10/top-10-dtrace-scripts-for-mac-os-x/) - OSX application to trace which program opens files
+
+	* `sudo opensnoop 2>&1 | ggrep -vE "^dtrace"` [1](https://apple.stackexchange.com/questions/343423/opensnoop-dtrace-error-on-enabled-probe-id-5-id-163-syscallopenreturn-i) - Filters dtrace erros
+	* `sudo opensnoop -n ScanSnap` - Filters by application name
+
+* pkill [1](https://stackoverflow.com/questions/160924/how-can-i-kill-a-process-by-name-instead-of-pid) - Kill process by name
 
 * ps [1](https://en.wikipedia.org/w/index.php?oldid=765270359) - Static process monitor
+
+	* `ps faux` - Show process and dependencies between them
 
 * screen [1](https://en.wikipedia.org/wiki/GNU_Screen) - terminal multiplexer
 
@@ -536,6 +596,15 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
   * `screen -dmS <SESSION_NAME> <COMMAND>` - Starts screen in detached mode using the given session name and command
 
 * `sudo service apache restart` - Restart command for System V (using /etc/init.d)
+
+* systemctl [1](https://www.freedesktop.org/software/systemd/man/systemctl.html) — Control the systemd system and service manager
+
+* tlp [1](https://linrunner.de/tlp/index.html), [2](https://wiki.archlinux.org/index.php/TLP) - Battery Management
+
+	```
+	TLP_DEFAULT_MODE=BAT		# Mode when no power detected
+	TLP_PERSISTENT_DEFAULT=1	# 1=always use default
+	```
 
 * tmux [1](https://en.wikipedia.org/wiki/Tmux) - Terminal multiplexer
 
@@ -565,7 +634,7 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
       * `;` - Toggle last active pane
       * `%` - Split pane vertically
       * `"` - Split pane horizontally
-      * `{` - Shuffle current pane to left
+      * `{` [1](https://superuser.com/questions/879190/how-does-one-swap-two-panes-in-tmux) - Shuffle current pane to left
       * `}` - Shuffle current pane to right
       * `space` -  Toggle between pane layouts
       * `o` - Next pane
@@ -576,17 +645,20 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
       * `x` - Close current pane
       * `M + Arrow key` - Resize pane (M = Alt key)
 
-* top [1](https://en.wikipedia.org/w/index.php?oldid=758781701) - Real-time task manager
+* top [1](https://en.wikipedia.org/w/index.php?oldid=758781701), [2](https://www.youtube.com/watch?v=jB6dS3_xdBA), [3](https://www.youtube.com/watch?v=oFYENqz2ZL8) - Tool to real-time inspect CPU and RAM usage of processes on system
+
 * tree [1](https://en.wikipedia.org/w/index.php?oldid=766877590) - Recursive directory listing program
 
   * `tree -d -L 2`
+
+* uptime - Show runtime of system till last reastart
 
 ## Docker
 
 ### Create
 
 * `docker pull jenkins:2.32.1` - Download docker image from registry
-* `docker build -t "tagIt" .` [1](https://docs.docker.com/engine/reference/commandline/build/) - Build an image from a Dockerfile
+* `docker build -t "tagIt" .` - Build an image from a Dockerfile
 
   * `--no-cache` [1](https://stackoverflow.com/questions/35594987/how-to-force-docker-for-clean-build-of-an-image) - Build from scratch
 
@@ -643,12 +715,20 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 
 ## Docker-Compose
 
+* `docker-compose ps` - List images and status
 * `docker-compose rm -f` [1](https://stackoverflow.com/questions/32612650/how-to-get-docker-compose-to-always-re-create-containers-from-fresh-images) - Remove stopped service containers without asking
 * `docker-compose pull` - Pull images for services
-* `docker-compose up --build` - Build and **starts** container for each service
+* `docker-compose up` -  **Starts** container for each service
+
+  * `--build` - Build images as well
+  * `-d` - Start as daemon in the background
+
 * `docker-compose start` [1](https://stackoverflow.com/questions/33715499/what-is-the-difference-between-docker-compose-up-and-docker-compose-start) - Starts already existing container
 * `docker-compose stop -t 1` - Stop containers with a timeout (but keep them)
 * `docker-compose down -v --rmi all` [1](https://stackoverflow.com/questions/45511956/remove-a-named-volume-with-docker-compose) - Stops and removes containers, networks, volumens as images
+* `docker-compose restart` - Restart all containers
+* `docker-compose logs -f nginx` - Show logs for nginx container and follow new once
+* `docker-compose exec CONTAINER COMMAND` - Run command in container
 
 ## Kubernetes
 
@@ -762,6 +842,8 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 
 * `shutdown -rf now`
 
+* w [1](https://en.wikipedia.org/wiki/W_(Unix)) - Show logged in users
+
 * who [1](https://en.wikipedia.org/w/index.php?oldid=731053985) - Display users logged in
 
   * `who -r` - Show runlevel
@@ -771,6 +853,7 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 * diff - Compare text files
 
   * `diff <(echo "${S1}") <(echo "${S2}")` [1](https://stackoverflow.com/questions/13437104/compare-content-of-two-variables-in-bash) - Compare two text parameters
+  * `diff -wy --suppress-common-lines  FILE_A FILE_B` [1](https://stackoverflow.com/questions/17195308/unix-diff-side-to-side-results), [2](https://unix.stackexchange.com/questions/423186/diff-how-to-ignore-empty-lines) - Show diff side by side
 
 * head - Show beginning of file
 
@@ -796,16 +879,22 @@ To get a general overview see [Version control systems](https://en.wikipedia.org
 
 ## Vim
 
-The one and only `vim` aka [Vi IMproved](https://en.wikipedia.org/w/index.php?oldid=801583579).
+* Setup
 
-* Edit shell commands in vim [1](http://nuclearsquid.com/writings/edit-long-commands/)
-* Debug loading times [1](http://kynan.github.io/blog/2015/07/31/how-to-speed-up-your-vim-startup-time), [2](https://puroh.it/speeding-up-vim/), [3](http://www.gbonfant.com/blog/speed-up-performance-of-iterm-and-vim)
+	The one and only `vim` aka [Vi IMproved](https://en.wikipedia.org/w/index.php?oldid=801583579).
 
-* Plugins
-  * Search for
-    * [vimawesome.com](https://vimawesome.com/)
-  * Manage them
-    * [vim-plug](https://github.com/junegunn/vim-plug)
+	* Edit shell commands in vim [1](http://nuclearsquid.com/writings/edit-long-commands/)
+	* Debug loading times [1](http://kynan.github.io/blog/2015/07/31/how-to-speed-up-your-vim-startup-time), [2](https://puroh.it/speeding-up-vim/), [3](http://www.gbonfant.com/blog/speed-up-performance-of-iterm-and-vim)
+
+	* Plugins
+	  * Search for
+	    * [vimawesome.com](https://vimawesome.com/)
+	  * Manage them
+	    * [vim-plug](https://github.com/junegunn/vim-plug)
+
+* Use
+
+	* `:w !sudo dd of=%` [1](https://unix.stackexchange.com/questions/11004/becoming-root-from-inside-vim) - Save file as root
 
 # Shell bulletins
 
@@ -827,7 +916,12 @@ The one and only `vim` aka [Vi IMproved](https://en.wikipedia.org/w/index.php?ol
     dig any getgoetz.com @`dig +short SOA getgoetz.com | cut -d' ' -f1`
     ```
 
-* httpie [1](https://httpie.org/),[2](https://github.com/jkbrzt/httpie) - Better curl with JSON support
+* firewall-cmd [1](https://www.cyberciti.biz/faq/howto-rhel-linux-open-port-using-iptables/) - Firewall CLI for Red Hat/ Fedora/ CentOS
+
+	* `firewall-cmd --list-ports` - List all open ports
+	* `firewall-cmd --permanent --add-port 80/tcp` - Open up port 80
+
+* httpie [1](https://httpie.org/),[2](https://github.com/jkbrzt/httpie) - Better curl with JSON sßupport
 
 * ifconfig [1](https://en.wikipedia.org/wiki/Ifconfig) - Display network interface configuration for Unix-systems
 
@@ -846,6 +940,8 @@ The one and only `vim` aka [Vi IMproved](https://en.wikipedia.org/w/index.php?ol
   * `ip neighbour` - Show neighbour in your network similar to `arp -a`
   * `ip -s` or `ss` - Show network statistics like `netstat`
 
+* ipmi [1](https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface), [2](https://www.youtube.com/watch?v=2LXijv0d3Ac), [3](https://www.youtube.com/watch?v=KAWVvPRQ-2Q) - Intelligent Platform Management Interface eg. Supermicro
+
 * ipcalc [1](https://pypi.python.org/pypi/ipcalc) - IP subnet calculator
 
 * iperf3 [1](http://software.es.net/iperf/) - Tool for network speed test
@@ -857,10 +953,15 @@ The one and only `vim` aka [Vi IMproved](https://en.wikipedia.org/w/index.php?ol
 
 * iptraf [1](http://unix.stackexchange.com/questions/71456/check-outgoing-network-traffic) - Network statistic tool
 
-* netcat aka nc - Tool to read and write from network connections
+* netcat aka nc [1](https://www.sans.org/security-resources/sec560/netcat_cheat_sheet_v1.pdf) - Tool to read and write from network connections
 
-  * `nc -vz external.host 6379` - Just test Redis port with verbose output
-  * `netcat -vv localhost 3306`
+  * `nc -v localhost 6379` - Just test Redis port with verbose output
+  * `netcat -vvz HOSTNAME PORT_OR_RANGE` - Test using debug mode
+	  * `v` - Show verbose output
+	  * `vv` - Verbose debug output
+	  * `z` - Zero io mode emitting an package without payload
+	  * `w 1` - Wait timeout for connection
+	  * `u` - UDP mode (default is TCP)
 
 * netstat - Host based network statistic tool
 
@@ -1083,20 +1184,35 @@ _Hint:_ SSH agent forwarding is working nicely together with [Capistrano](http:/
   * `find /path/to/directory/ -mindepth 1 -maxdepth 1 -mtime +365 -type d -print -exec rm -r "{}" \;` - [1](http://unix.stackexchange.com/questions/89925/how-to-delete-directories-based-on-find-output), [2](http://askubuntu.com/questions/377438/how-can-i-recursively-delete-all-files-of-a-specific-extension-in-the-current-di) Delete directories recursivly
   * `find . -name '*.py' -exec grep -Hn 'STRING_INSIDE_PYHTON' {} \;` [1](https://unix.stackexchange.com/questions/21033/how-can-i-grep-the-results-of-find-using-exec-and-still-output-to-a-file) - Search for python files and inside them grep for given string. The result is shown with path and line number.
   * `find -E . \( -type f -or -type d \) -print| awk -F/ '{ if (length($NF)  > 143) { print length($NF),"\t",$0; fflush() } else {} }' > files_to_long` [1](https://unix.stackexchange.com/questions/207504/find-files-whose-name-is-4-characters-long) - Find files and folders which names are longer then 143
+  * `find . -name 'package.json' -exec grep -i 'react' {} \; -print` - Search for package.json and then filter if contains react string
 
 * grep [1](https://www.cyberciti.biz/faq/grep-regular-expressions/)
 
-  * `grep foo /home/lony/bar` - Search for foo in bar
-  * `grep -E 'foo|bar' *.tx` [1](https://unix.stackexchange.com/questions/37313/how-do-i-grep-for-multiple-patterns) - Searching for multiple patterns
-  * `grep -E --color=auto 'foo|bar' *.tx` - Highlight pattern found
-  * `grep -e ERROR -e WARN YOURLOG.log | grep -v IgnoreException` - Searches in YOURLOG for ERRORs and WARnings but ignores your IgnoreException
-  * `grep -r foo /home/lony/bar` - Search recursively for foo in bar
-  * `grep --include \*.py -r foo /home/lony/bar` [1](https://stackoverflow.com/questions/12516937/grep-but-only-certain-file-extensions) - Search reursively for foo in bar folder but only if file ends with *.py
-  * `grep -nr 'foo*' .` [1](http://stackoverflow.com/questions/4121803/how-can-i-use-grep-to-find-a-word-inside-a-folder) - Search for foo* in `.` showing relative line number
-  * `grep -lr 'SEAR_TERM' .` [1](https://stackoverflow.com/questions/6637882/how-can-i-use-grep-to-show-just-filenames-no-in-line-matches-on-linux) - Recurive search for term and show only file names
-  * `zgrep foo /home/lony/log.1.gz | less` - Search inside gzip log file for foo
-  * `grep 'IPTABLES-OUTBOUND-' /var/log/kern.log | sed 's/.* DST=\(.*\)[[:space:]]LEN.* DPT=\(.*\)[[:space:]]WINDOW.*/\1_\2/' | sort | uniq -c | sort -n` [1](http://stackoverflow.com/questions/6447473/linux-command-or-script-counting-duplicated-lines-in-a-text-file) - Extract log entry and count distinct occurence of IP_Port combinations by frequency
-  * `grep 'version' package.json | sed 's/.*version": "\(.*\)".*/\1/g'` - Get version from package.json of node projekts
+  * Search file
+
+	  * `grep foo /home/lony/bar` - Search for foo in bar
+	  * `grep -E 'foo|bar' *.tx` [1](https://unix.stackexchange.com/questions/37313/how-do-i-grep-for-multiple-patterns) - Searching for multiple patterns
+	  * `grep -E --color=auto 'foo|bar' *.tx` - Highlight pattern found
+	  * `grep -e ERROR -e WARN YOURLOG.log | grep -v IgnoreException` - Searches in YOURLOG for ERRORs and WARnings but ignores your IgnoreException
+	  * `zgrep foo /home/lony/log.1.gz | less` - Search inside gzip log file for foo
+
+  * Extract value
+
+	   * `grep 'IPTABLES-OUTBOUND-' /var/log/kern.log | sed 's/.* DST=\(.*\)[[:space:]]LEN.* DPT=\(.*\)[[:space:]]WINDOW.*/\1_\2/' | sort | uniq -c | sort -n` [1](http://stackoverflow.com/questions/6447473/linux-command-or-script-counting-duplicated-lines-in-a-text-file) - Extract log entry and count distinct occurence of IP_Port combinations by frequency
+     * `grep 'version' package.json | sed 's/.*version": "\(.*\)".*/\1/g'` - Get version from package.json of node projekts
+
+  * Search folder
+
+	  * `grep -r foo /home/lony/bar` - Search recursively for foo in bar
+	  * `grep -rnwl '/path/to/foo/' -e 'bar'` [1](https://stackoverflow.com/questions/16956810/how-do-i-find-all-files-containing-specific-text-on-linux) - Search for bar in all files under foo
+	  * `grep --include \*.py -r foo /home/lony/bar` [1](https://stackoverflow.com/questions/12516937/grep-but-only-certain-file-extensions) - Search reursively for foo in bar folder but only if file ends with *.py
+	  * `grep -nr 'foo*' .` [1](http://stackoverflow.com/questions/4121803/how-can-i-use-grep-to-find-a-word-inside-a-folder) - Search for foo* in `.` showing relative line number
+	  * `grep -lr 'SEAR_TERM' .` [1](https://stackoverflow.com/questions/6637882/how-can-i-use-grep-to-show-just-filenames-no-in-line-matches-on-linux) - Recurive search for term and show only file names
+
+
+# Windowing system
+
+* `system_profiler SPDisplaysDataType | grep Resolution` [1](https://superuser.com/questions/447295/how-can-i-get-the-current-screen-resolution-from-the-command-line-on-os-x), [2](https://apple.stackexchange.com/questions/162860/how-to-view-current-display-resolution/177757) - Current resolutions used for OSX
 
 # Documentation
 
@@ -1110,7 +1226,7 @@ _Hint:_ SSH agent forwarding is working nicely together with [Capistrano](http:/
 ## Slack
 
 * `/remind #random “Standup in 2 minutes  -> https://meet.google.com/xxx-xxx” at 11:28 every weekday.` - Remind random channel every weekday about standup at 11:28
-* `/remind #tech “Reminder: Please prepare your teams presentation!” 8:00 September 12th every other Thursday` - Reminder for every second
+* `/remind #tech “Reminder: Please prepare your teams presentation!” 8:00 September 12th every other Thursday` - Reminder for every second Thursday
 
 
 # Miscellaneous
@@ -1136,6 +1252,7 @@ _Hint:_ SSH agent forwarding is working nicely together with [Capistrano](http:/
   * [pasting](#pasting)
   * [pipe](#pipe)
   * [read](#read)
+  * [Colors](#colors)
 
 ----
 
@@ -1151,11 +1268,19 @@ Check which shell is currently used?
 
   * Prompt
 
+	  * `exec bash -l` [1](https://stackoverflow.com/questions/10341271/switching-from-zsh-to-bash-on-osx-and-back-again) - Swtich from zsh
+	  * Look change
+
     ```
     ERRORLEVEL TIME USER@HOST PATH #
     2 [14:03:07] lony@hobbes /var/log/upstart # echo $PS1
     $? \[\e[01;34m\][$(date "+%H:%M:%S")] \[\e[01;31m\]\u\[\e[1;34m\]@\[\e[1;31m\]\h\[\e[1;34m\] \w # \[\e[0m\]
     ```
+
+  * Frameworks
+
+	  * Most use none
+	  * [oh-my-bash](https://github.com/ohmybash/oh-my-bash)
 
 * [zsh](http://www.zsh.org/)
 
@@ -1203,7 +1328,7 @@ For an explanation why to use `env` read [1](https://en.wikipedia.org/wiki/Sheba
 
 ### Programming sh
 
-### array
+#### array
 
 * Concat array [1](http://stackoverflow.com/questions/9522631/how-to-put-line-comment-for-a-multi-line-command), [2](http://stackoverflow.com/questions/18599711/how-can-i-split-a-shell-command-over-multiple-lines-when-using-an-if-statement)
 
@@ -1232,7 +1357,7 @@ For an explanation why to use `env` read [1](https://en.wikipedia.org/wiki/Sheba
   done
   ```
 
-### for
+#### for
 
 * `for i in "ci" "stage" "prod"; do (export ENVI=$i; echo $ENVI); done` [1](http://stackoverflow.com/questions/8880603/loop-through-array-of-strings-in-bash),[2](https://www.cyberciti.biz/faq/linux-unix-bash-for-loop-one-line-command/),[3](http://stackoverflow.com/questions/10856129/setting-an-environment-variable-before-a-command-in-bash-not-working-for-second)
 
@@ -1248,14 +1373,14 @@ For an explanation why to use `env` read [1](https://en.wikipedia.org/wiki/Sheba
 
 * `for i in {1..3}; do ls 1 && break || sleep 5; done` [1](https://unix.stackexchange.com/questions/82598/how-do-i-write-a-retry-logic-in-script-to-keep-retrying-to-run-it-upto-5-times/82610) - Try `ls 1` command 3 times before go on (simple retry mechanism as `ls 1` is no correct command)
 
-### if
+#### if
 
 * Bash version => 4 [1](http://unix.stackexchange.com/questions/250778/should-i-check-bash-version)
 
   ````
   if [[ ${BASH_VERSION%%.*} -lt 4 ]]; then
-    echo "This script requires bash version > 4. Currently running is ${BASH_VERSION%%.*}"
-    exit 1
+  echo "This script requires bash version > 4. Currently running is ${BASH_VERSION%%.*}"
+  exit 1
   fi
   ````
 
@@ -1292,11 +1417,11 @@ For an explanation why to use `env` read [1](https://en.wikipedia.org/wiki/Sheba
   fi
   ```
 
-### until
+#### until
 
 * `until ssh aws-host; do echo "Try again"; sleep 2; done`
 
-### pasting
+#### pasting
 
 ```
 # With parameter expanding
@@ -1315,23 +1440,29 @@ EOF
 ```
 
 
-### pipe
+#### pipe
 
 * `> FILE` same as `1> FILE` - Pipe standard out (stdout) into file and overwrites content
 * `2> FILE` [1](http://stackoverflow.com/questions/818255/in-the-shell-what-does-21-mean) - Pipe errors (stderr) into file and overwrites content
 * `2>&1 >> FILE` [1](http://serverfault.com/questions/196734/bash-difference-between-and-operator) - Pipe errors (stderr) and standard out (stdout) into file and append content
+* `bash --rcfile <(echo "ls; pwd")` [1](https://stackoverflow.com/questions/7120426/how-to-invoke-bash-run-commands-inside-the-new-shell-and-then-give-control-bac) - Pipe commands (#1): to starting bash from shell
+* `docker run -it --mount src="$(pwd)",target=/root/dotFiles,type=bind --rm amazonlinux bash -c "cd /root/dotFiles; ./setup.sh; exec \"\$0\""` [1](https://stackoverflow.com/questions/59814742/docker-run-bash-init-file) - Pipe command (#2): to docker bash from local shell
 
-### read
+#### read
 
 * `read -p "Enter username to check:" USERNAME && echo $USERNAME`
 
-### error-handling
+#### error-handling
 
 * set -? [1](https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin)
 
-  * `-e` - Failed command causes exit of script
-  * `-u` - Treat unset parameters as error and exit
-  * `-x | -o xtrace` - Trace of simple commands and their arguments
+  * `-e` - Failed command causes exit of script.
+  * `-u` - Treat unset parameters as error and exit.
+  * `-x` - Trace of simple commands and their arguments
+
+#### Colors
+
+The shell uses [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code) to visualise colors. To change a color you first have to escape and then define the color as in this example `\033[0m`. [1](http://jafrog.com/2013/11/23/colors-in-terminal.html), [2](https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux), [3](https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences)
 
 
 ## Databases
@@ -1349,20 +1480,53 @@ Overview of [SQL](https://db-engines.com) and [No-SQL](http://nosql-database.org
 
 ### SQL
 
-#### MySQL
+#### MySQL / MariaDB
 
-Run `mysql -u root -h localhost -p` to open the MySQL console, which lets you interact with the database.
+* Commands to maintain the database
 
-* `SELECT User FROM mysql.user;` [1](http://stackoverflow.com/questions/1135245/how-to-get-a-list-of-mysql-user-accounts) - Show users
-* Change user password [1](http://stackoverflow.com/questions/22774739/change-mysql-user-password-using-command-line)
+	Run `mysql -u root -h localhost -p` to open the MySQL console, which lets you interact with the database.
 
-  ```
-  USE mysql;
-  SET PASSWORD FOR 'USER'@'localhost' = PASSWORD('CLEAR_TEXT_PASSWORD');
-  FLUSH PRIVILEGES;
-  ```
+	* `SELECT User FROM mysql.user;` [1](http://stackoverflow.com/questions/1135245/how-to-get-a-list-of-mysql-user-accounts) - Show users
+	* Change user password [1](http://stackoverflow.com/questions/22774739/change-mysql-user-password-using-command-line)
 
-* `SHOW SLAVE STATUS\G` [1](https://dev.mysql.com/doc/refman/5.7/en/replication-administration-status.html) - To check replication status
+	  ```
+	  USE mysql;
+	  SET PASSWORD FOR 'USER'@'localhost' = PASSWORD('CLEAR_TEXT_PASSWORD');
+	  FLUSH PRIVILEGES;
+	  ```
+
+* Debug
+
+	* `SHOW SLAVE STATUS\G` [1](https://dev.mysql.com/doc/refman/5.7/en/replication-administration-status.html) - To check replication status
+
+	* Show process list [1](https://mariadb.com/kb/en/show-processlist/)
+
+	* Show Query Log [1](https://stackoverflow.com/questions/7818031/sql-command-to-display-history-of-queries/33252764), [2](https://mariadb.com/kb/en/general-query-log/)
+
+	  ```
+	  SET GLOBAL log_output = 'TABLE';
+	  SET GLOBAL general_log = 'ON';
+	  Take a look at the table mysql.general_log
+	  ```
+
+	* Show binary log only dumping transactions altering data [1](https://mariadb.com/kb/en/binary-log/)
+
+	* Disk space per table - [1](https://dba.stackexchange.com/questions/14337/calculating-disk-space-usage-per-mysql-db)
+
+	  ```
+	  SELECT table_schema, sum((data_length+index_length)/1024/1024) AS MB FROM information_schema.tables group by 1;
+	  ```
+
+* Backup & Restore
+
+    * Backup [1](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Exporting.NonRDSRepl.html)
+    * Restore [1](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html)
+
+      * `mysql --protocol=tcp --host=127.0.0.1 --user=root --port=3306 -p -vvv --default-character-set=utf8  < "import_dump.sql"` - Import data into database
+
+        * `-p` - Ask for database passwort
+        * `-vvv` - Show verbose output
+
 
 #### PostgreSQL
 
@@ -1440,7 +1604,7 @@ Beeing a object-relational database management system PostgreSQL has both relati
 
       * `SELECT * FROM pg_stat_all_tables;` [1](https://dba.stackexchange.com/questions/70017/does-amazon-rds-postgresql-require-vacuum) - Show vacuum status of tables
 
-* Backuo & Restore
+* Backup & Restore
 
     * Backup
 
@@ -1469,6 +1633,15 @@ Beeing a object-relational database management system PostgreSQL has both relati
 
 ### NoSQL
 
+NoSQL is term used for Not Only SQL, which covers four major categories - Key-Value, Document, Column Family and Graph databases.
+
+* Key-value databases are well-suited to applications that have frequent small reads and writes along with simple data models. These records are stored and retrieved using a key that uniquely identifies the record, and is used to quickly find the data within the database. eg. Redis
+* Document databases have ability to store varying attributes along with large amounts of data eg. MongoDB , CouchDB
+* Column family databases are designed for large volumes of data, read and write performance, and high availability eg. Cassandra, HBase
+* Graph database is a database that uses graph structures for semantic queries with nodes, edges and properties to represent and store data eg. Neo4j
+
+Source: [1](https://stackoverflow.com/questions/2798251/whats-the-difference-between-nosql-and-a-column-oriented-database)
+
 #### Mongo
 
 Run `mongo` to open the mongo console, which lets you interact with the database. To connect to specific host and port use `mongo --host ShouldIAutomate.It --port 27017`.
@@ -1495,9 +1668,9 @@ Run `mongo` to open the mongo console, which lets you interact with the database
   ```
   PUT _cluster/settings
   {
-      "transient": {
-        "cluster.routing.allocation.enable": "none"
-      }
+  "transient": {
+    "cluster.routing.allocation.enable": "none"
+  }
   }
   ```
 
@@ -1514,6 +1687,7 @@ Overview of commands or other useful information for different [Linux distributi
 
 * [pkgs.org](https://pkgs.org/) - Search for available packages across distributions
 * `uname -a` - Show kernel version and private system information
+* `echo $XDG_SESSION_TYPE` [1](https://askubuntu.com/questions/904940/how-can-i-tell-if-i-am-running-wayland) - Show current window manager used
 
 ### Debian
 
@@ -1529,6 +1703,7 @@ Overview of commands or other useful information for different [Linux distributi
 ### Redhat
 
 * `/etc/redhat_release` or `lsb_release -a` [1](https://stackoverflow.com/questions/4140219/how-to-confirm-redhat-enterprise-linux-version) - Print version
+* `/etc/fedora-release` [1](https://stackoverflow.com/questions/540603/how-can-i-find-the-version-of-the-fedora-i-use)
 
 #### Amazon
 
